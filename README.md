@@ -19,4 +19,5 @@ Issues
 * How to have multiple objects tracking user at the same time
 
 Bonus
-
+Fog of war + tracking camera(zoom)
+https://pothonprogramming.github.io/content/tile-scroll/tile-scroll.html
