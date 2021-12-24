@@ -1,8 +1,20 @@
 # GA_Project1
 GA_Project1
 
-Awaiting approval --
-#Idea 1
+
+1) Map
+
+2a) Person walking
+2b) Enemies chasing
+
+3) Explosions
+
+4) walls and collisions
+
+5) Bonuses
+
+//Summary
+
 dubloon disaster 
 https://www.youtube.com/watch?v=9fouXWegls0&t=2053s
 
