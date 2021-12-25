@@ -2,7 +2,7 @@
 GA_Project1
 
 
-1) Map
+1) Map (using canvas) // consider using SVG?
 
 2a) Person walking
 2b) Enemies chasing
