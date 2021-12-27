@@ -9,12 +9,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="pj1_style_guowei.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="module" src="./CanvasStack-2v01.js"></script>
         <!-- <script type="text/javascript" src="http://calebevans.me/projects/jcanvas/resources/jcanvas/jcanvas.js"></script> -->
     </head>
     <body>
-        <div id='hi'></div>
-        <canvas id='canvas'></canvas>
-        <canvas id='canvas2'></canvas>
+        <div style="position:absolute;left:50px;top:50px;">
+            <canvas id="canvas_back" width="" height="" style="position:absolute;"></canvas>
+            <canvas id="canvas_front" width="" height="" style="position:absolute;"></canvas>
+        </div>
         <!-- <img src="./assets/PokeGoldDemo-SilentHills.png" alt="silent hill" width="500" height="600">
          -->
         

@@ -9,10 +9,15 @@ body{
 	margin:0px;
 }
 
-#canvas{
+#canvas.back{
 	width: 100%; 
 	height: 100%;
 	border: 1px solid black; 
+}
+#canvas.front{
+	width: 100%; 
+	height: 100%;
+	border: 1px solid red; 
 }
 
 .this{
