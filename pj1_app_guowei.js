@@ -11,7 +11,7 @@ canvas_front.width = window.innerWidth
 
 const backgroundImg = new Image();
 backgroundImg.onload = function () {
-   ctx_front.drawImage(backgroundImg,0,0,550,700); //wait till img loaded
+   ctx_back.drawImage(backgroundImg,0,0,550,700); //wait till img loaded
 }
 backgroundImg.src = "./assets/PokeGoldDemo-SilentHills.png";
 
@@ -47,9 +47,11 @@ class Player{
       ctx_front.drawImage(img,x ,y ,30,40 ); //wait till img loaded
           }
       img.src = "./assets/person.png";
-      
-
+  
     }
+    update() {
+      this.drawImg()
+      }
   }
   
 const x = canvas_front.width /2 
@@ -66,14 +68,15 @@ console.log(player_)
 
 
 class Zombies{
-  constructor(x,y){
+  constructor(x,y,radius){
     let randomX = Math.floor(Math.random()*canvas_front.width)  
     let randomY = Math.floor(Math.random()*canvas_front.height)
     this.x=randomX;
     this.y=randomY;
-    //this.radius=radius;
+    this.radius=radius;
     this.velocity_y=((player_.y-this.y)/80);
     this.velocity_x=((player_.x-this.x)/80);
+    this.color='green'
   }
 
   update(){
@@ -86,23 +89,49 @@ class Zombies{
   drawImg(){
     const x = this.x; // x coordinate
     const y = this.y; // y coordinate
-    const img = new Image();
-    img.onload = function () {
-    ctx_front.drawImage(img,x ,y ,50,50); //wait till img loaded //50,50 for size
-        }
-    img.src = "./assets/zombies.png";
+    // const img = new Image();
+    // img.onload = function () {
+    // ctx_front.drawImage(img,x ,y ,50,50); //wait till img loaded //50,50 for size
+    //     }
+    // img.src = "./assets/zombies.png";
+
+    ctx_front.beginPath()
+  // const x = this.x ; // x coordinate
+  // const y = this.y ; // y coordinate
+
+    const radius = 10; // Arc radius
+    const startAngle = Math.PI *0; // Starting point on circle //0 is at right horizontal
+    const endAngle = Math.PI *1.75; // End point on circle
+    const counterclockwise = false; 
+    console.log(x)
+    console.log(y)
+    ctx_front.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+    ctx_front.fillStyle = this.color;
+    ctx_front.fill()
+
     }
+
+  explode(){
+    
+  }
   }
 
-const zombie_ = new Zombies(80,80,50)
-const zombie_2 = new Zombies(400,400,50)
+// const zombie_ = new Zombies(80,80,50)
+// const zombie_2 = new Zombies(400,400,50)
 
-const zombieS = [ zombie_,zombie_2]
+const zombieS = [ ]
 
 let number = 0;
 let animate = function () {
+
+  const backgroundImg = new Image();
+  backgroundImg.onload = function () {
+  ctx_back.drawImage(backgroundImg,0,0,550,700); //wait till img loaded
+}
     if (number <100){
 		requestAnimationFrame(animate);
+    ctx_front.clearRect(0,0,canvas_front.width,canvas_front.height)
+    player_.update()
     zombieS.forEach((zom)=> {
       zom.update()
       //zom.drawImg() 
