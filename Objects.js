@@ -30,7 +30,41 @@ class Player {
   }
 }
 
+///Sprite
+//person
+const imagesX = {}
+
+imagesX.player = new Image();
+imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+
+const playerWidth = '32';  //per sprite width px based on sheet
+const playerHeight = '32';     //per sprite height px based on sheet
+const playerWidthExt = 72;
+const playerHeightExt = 72;
+let playerFrameX = 3;            //which sprite in sprite sheet
+let playerFrameY = 0;            //which sprite in sprite sheet
+let playerX = 20;                  //position in canvas
+let playerY = 20;                  //posittion in canvas
+const playerSpeed = 6; 
+
+function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
+  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+}
+
+function animatePerson(){
+  drawSprite(imagesX.player, playerWidth * playerFrameX, playerHeight * playerFrameY, playerWidth, playerHeight, playerX, playerY, playerWidthExt, playerHeightExt);
+//walking loop
+  if (playerFrameX <3){
+    playerFrameX++;
+  }else playerFrameX = 0;
+
+if (playerX < canvas_back.width + playerWidthExt) {
+  playerX += playerSpeed
+}else playerX = 0 + playerWidthExt
+}
+
 let imagesZom = [];
+let imagesZomL = [];
 //imagesZom.length =10;
 //console.log(imagesZom.length)
 
@@ -48,8 +82,21 @@ for (let k = 1; k <= 10; k++) {
     console.log(imagesZom[k].src)
 }
 
-let j = 1 //for zombieLoop
+let g = 1
+for (let g = 1; g <= 10; g++) {
+    console.log(imagesZomL.length)
+    imagesZomL[g] = new Image();
+    imagesZomL[g].onload = () => {
+      isLoaded = true;
+      console.log(isLoaded)
+    }
+    imagesZomL[g].src = `./assets/zombie_male_left/Walk (${g.toString()}).png`
+    //console.log(i)
+    console.log(imagesZomL[g].src)
+}
 
+let j = 1 //for zombieLoop
+let p = 1 //for zombieLoop
 function drawSpriteZom(img, dX, dY, dW, dH) {
   ctx_back.drawImage(img, dX, dY, dW, dH);
 }
@@ -64,13 +111,14 @@ class Zombies {
     this.velocity_y = ((player_.y - this.y) / 100);
     this.velocity_x = ((player_.x - this.x) / 100);
     this.color = 'green'
-    this.zomWidthExt = 124;
-    this.zomHeightExt = 124;
+    this.zomWidthExt = 84;
+    this.zomHeightExt = 84;
   }
 
   update() {
     this.zombieAnimateLoop()   //update image location
-    console.log(this.velocity)
+    console.log(this.velocity_y)
+    console.log(this.velocity_x)
     this.y = this.y + this.velocity_y
     this.x = this.x + this.velocity_x
 
@@ -79,6 +127,7 @@ class Zombies {
     let zomX = this.x; // x coordinate
     let zomY = this.y; // y coordinate
     
+    if(this.velocity_x > 0){
       if (j < 11) { 
         console.log(j)
         drawSpriteZom(imagesZom[j], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
@@ -88,6 +137,18 @@ class Zombies {
          j = 1
          drawSpriteZom(imagesZom[j], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
       }
+    }else{
+      if (p < 11) { 
+        console.log(p)
+        drawSpriteZom(imagesZomL[p], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
+        console.log(imagesZomL[p])
+        p++
+       } else {
+         p = 1
+         drawSpriteZom(imagesZomL[p], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
+      }
+
+    }
 
     }
     //ctx_back.drawImage(imgZombie, x, y, 50, 50); //wait till img loaded //50,50 for size

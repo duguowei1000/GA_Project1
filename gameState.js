@@ -13,38 +13,7 @@ imgPerson.src = "./assets/person.png";
 const imgZombie = new Image();
 imgZombie.src = "./assets/zombies.png";
 
-///Sprite
-//person
-const imagesX = {}
 
-imagesX.player = new Image();
-imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
-
-const playerWidth = '32';  //per sprite width px based on sheet
-const playerHeight = '32';     //per sprite height px based on sheet
-const playerWidthExt = 72;
-const playerHeightExt = 72;
-let playerFrameX = 3;            //which sprite in sprite sheet
-let playerFrameY = 0;            //which sprite in sprite sheet
-let playerX = 20;                  //position in canvas
-let playerY = 20;                  //posittion in canvas
-const playerSpeed = 6; 
-
-function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
-  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
-
-function animatePerson(){
-  drawSprite(imagesX.player, playerWidth * playerFrameX, playerHeight * playerFrameY, playerWidth, playerHeight, playerX, playerY, playerWidthExt, playerHeightExt);
-//walking loop
-  if (playerFrameX <3){
-    playerFrameX++;
-  }else playerFrameX = 0;
-
-if (playerX < canvas_back.width + playerWidthExt) {
-  playerX += playerSpeed
-}else playerX = 0 + playerWidthExt
-}
 ////
 
 const x = canvas_back.width / 2
@@ -76,7 +45,7 @@ let startGameLoop =  function () {
         //Distance betw zombie and player
         const dist = Math.hypot(player_.x - zom.x, player_.y - zom.y)
         if (dist - zom.radius - player_.radius < 2) {
-          alert('game end!')
+          //alert('game end!')
         }
         //zom.drawImg() 
       })
@@ -91,7 +60,7 @@ let startGameLoop =  function () {
   //}
   // initiate Loop function
   setTimeout(() => {
-    requestAnimationFrame(startGameLoop)},200)
+    requestAnimationFrame(startGameLoop)},100)
 
 }
 startGameLoop()
