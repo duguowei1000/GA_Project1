@@ -1,10 +1,72 @@
+
 //create a Class for game Objects
+class DirectionInput {
+  constructor(){
+    this.heldDirections = [];
+    this.map = {
+  "ArrowUp": "up",
+  "KeyW" : "up",
+  "ArrowDown": "down",
+  "KeyS" : "down",
+  "ArrowLeft": "left",
+  "KeyA": "left",
+  "ArrowRight": "right",
+  "KeyD": "right",
+  }
+}
+
+get direction(){
+  //console.log(this.heldDirections[0])
+  return this.heldDirections[0]
+}
+
+
+initKeys(){
+document.addEventListener("keydown",e => {
+  //console.log(e.code);
+  const dir = this.map[e.code]
+  
+  if (dir && this.heldDirections.indexOf(dir) === -1) {
+  this.heldDirections.unshift(dir);
+  //console.log(this.heldDirections)
+  }
+});
+document.addEventListener("keyup", e => {
+  const dir = this.map[e.code];
+  const index = this.heldDirections.indexOf(dir);
+  if (index > -1) {
+    this.heldDirections.splice(index, 1);
+    console.log(this.heldDirections)
+  }
+})
+
+}
+}
 class Player {
   constructor(x, y, radius) {
     this.x = x;
     this.y = y;
     this.radius = 10;
     this.color = 'green'
+
+    this.directionUpdate = {
+      "up": ['y', -1],
+      "down": ['y', 1],
+      "left": ['x', -1],
+      "right": ['x', 1],
+      "stay": ['x', 0],
+
+    }
+  }
+
+  updatePosition(inputKeys){
+    console.log(inputKeys)
+    console.log(this.directionUpdate[inputKeys])
+    const [axisProperty, changePixel] = this.directionUpdate[inputKeys || "stay"] // [key] : value pair //undefined if no or condition
+    this[axisProperty] += changePixel //this.x += changePixel 
+    // console.log(axisProperty)
+    // console.log(changePixel)
+  
   }
 
   draw() {
@@ -25,8 +87,10 @@ class Player {
 
 
   }
-  update() {
+  update(inputKeys) {
+    this.updatePosition(inputKeys)
     this.drawImg()
+
   }
 }
 
@@ -68,7 +132,7 @@ let imagesZomL = [];
 //imagesZom.length =10;
 //console.log(imagesZom.length)
 
-//push images in
+//push images in //Right facing
 let k = 1
 for (let k = 1; k <= 10; k++) {
     console.log(imagesZom.length)
@@ -81,7 +145,7 @@ for (let k = 1; k <= 10; k++) {
     //console.log(i)
     console.log(imagesZom[k].src)
 }
-
+//left facing
 let g = 1
 for (let g = 1; g <= 10; g++) {
     console.log(imagesZomL.length)
@@ -113,21 +177,28 @@ class Zombies {
     this.color = 'green'
     this.zomWidthExt = 84;
     this.zomHeightExt = 84;
+    this.speed = 3
   }
 
+  speedMultiplier(){
+    let dist_ = Math.hypot(player_.x - this.x, player_.y - this.y) //dist bet player and zombie
+    let multiplier = this.speed / dist_ //distance is varying , speed is constant
+
+    return multiplier
+
+  }
   update() {
+    this.y = this.y + this.speedMultiplier() * (player_.y - this.y)
+    this.x = this.x + this.speedMultiplier() * (player_.x - this.x)
     this.zombieAnimateLoop()   //update image location
-    console.log(this.velocity_y)
-    console.log(this.velocity_x)
-    this.y = this.y + this.velocity_y
-    this.x = this.x + this.velocity_x
+
 
   }
   zombieAnimateLoop(){
     let zomX = this.x; // x coordinate
     let zomY = this.y; // y coordinate
     
-    if(this.velocity_x > 0){
+    if(player_.x - this.x > 0){
       if (j < 11) { 
         console.log(j)
         drawSpriteZom(imagesZom[j], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
@@ -155,4 +226,9 @@ class Zombies {
 
 }
 
+
+
 console.log('working Objects')
+
+
+
