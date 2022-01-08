@@ -1,0 +1,9 @@
+What I had done for my project (since last update)?
+Did animations for zombie. trying out for player now.
+
+What I am going to do for my project today?
+player animation
+need to add a reward system( more animation) 
+
+Any issues/blocker/bug?
+working on the walking animation

@@ -30,7 +30,7 @@ let number = 0;
 let startGameLoop =  function () {
 
   //let GameLoop = function ()  {
-    if (number < 2000) {
+    if (number < 100) {
       //clear canvas  
       ctx_back.clearRect(0, 0, canvas_back.width, canvas_back.height)
 
@@ -38,9 +38,11 @@ let startGameLoop =  function () {
       ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
 
       //Draw Objects
+      
       player_.update(directionInput.direction)
+      //player_.playerAnimateLoop('left')
       //player_.updatePosition(directionInput.direction)
-      //animatePerson()
+      //animatePerson('back')
       zombieS.forEach((zom) => {
         zom.update()
         //Distance betw zombie and player
