@@ -1,97 +1,22 @@
-
-//create a keypress Class for game Objects
-class DirectionInput {
-  constructor() {
-    this.heldDirections = [];
-    this.map = {
-      "ArrowUp": "up",
-      "KeyW": "up",
-      "ArrowDown": "down",
-      "KeyS": "down",
-      "ArrowLeft": "left",
-      "KeyA": "left",
-      "ArrowRight": "right",
-      "KeyD": "right",
-    }
-  }
-
-  get direction() {
-    //console.log(this.heldDirections[0])
-    return this.heldDirections[0]
-  }
-
-
-  initKeys() {
-    document.addEventListener("keydown", e => {
-      //console.log(e.code);
-      const dir = this.map[e.code]
-
-      if (dir && this.heldDirections.indexOf(dir) === -1) {
-        this.heldDirections.unshift(dir);
-        console.log(this.heldDirections)
-      }
-    });
-    document.addEventListener("keyup", e => {
-      const dir = this.map[e.code];
-      const index = this.heldDirections.indexOf(dir);
-      if (index > -1) {
-        this.heldDirections.splice(index, 1);
-        console.log(this.heldDirections)
-      }
-    })
-
-  }
+function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
 
+function drawSpriteZom(img, dX, dY, dW, dH) {
+  ctx_back.drawImage(img, dX, dY, dW, dH);
+}
 
-///Sprite
-//Player animation
+function drawSpriteCoins(img, dX, dY, dW, dH) {
+  ctx_back.drawImage(img, dX, dY, dW, dH);
+}
+
+/////////////////////////////////////////////////// PLAYER ///////////////////////////////////////////////////////
+
+//Player animation frames from Sprite
 const imagesX = {}
 
 imagesX.player = new Image();
 imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
-
-// const playerWidth = '32';  //per sprite width px based on sheet
-// const playerHeight = '32';     //per sprite height px based on sheet
-// const playerWidthExt = 72;
-// const playerHeightExt = 72;
-// let playerFrameX = 3;            //which sprite in sprite sheet
-// let playerFrameY = 0;            //which sprite in sprite sheet
-// let playerX = 20;                  //position in canvas
-// let playerY = 20;                  //position in canvas
-// const playerSpeed = 6; 
-
-// function animatePerson(facing){
-//   console.log(facing)
-//   if (facing = 'front'){
-//     playerFrameY = 0; //front facing
-//   }else{
-//     playerFrameY = 2; 
-//   }
-//   //walking loop
-//   //walking facefront
-//   // let playerFrameY = 0; 
-//   //   if (playerFrameX <3){
-//   //     playerFrameX++;
-//   //   }else playerFrameX = 0;
-
-//   // walking backfacing
-//   // let playerFrameY = 2; 
-//   console.log(playerFrameY)
-//     if (playerFrameX <3){
-//       playerFrameX++;
-//     }else playerFrameX = 0;
-
-//   if (playerX < canvas_back.width + playerWidthExt) {
-//     playerX += playerSpeed
-//   }else playerX = 0 + playerWidthExt
-
-//   drawSprite(imagesX.player, playerWidth * playerFrameX, playerHeight * playerFrameY, playerWidth, playerHeight, playerX, playerY, playerWidthExt, playerHeightExt);
-//   }
-
-function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
-  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
 
 
 
@@ -100,26 +25,23 @@ class Player {
   constructor(x, y, radius) {
     this.x = x;
     this.y = y;
-    this.radius = 10;
+    this.radius = 15
     this.color = 'green'
 
     this.playerWidth = '32';       //per sprite width px based on sheet
     this.playerHeight = '32';     //per sprite height px based on sheet
-    this.playerWidthExt = 72;
-    this.playerHeightExt = 72;
+    this.playerWidthExt = 72;         //stretch the player size
+    this.playerHeightExt = 72;        //stretch the player size
     this.playerFrameX = 3;            //which sprite in sprite sheet
     this.playerFrameY = 0;            //which sprite in sprite sheet
-    //this.playerX = 20;                  //position in canvas
-    //this.playerY = 20;                  //position in canvas
-    this.playerSpeed = 6;
-    this.faceAnimation = []
+    this.faceAnimation = []           //contains facing of player
 
     this.directionUpdate = {
-      "up": ['y', -1, 'back'],
-      "down": ['y', 1, 'front'],
-      "left": ['x', -1, 'left'],
-      "right": ['x', 1, 'right'],
-      "stay": ['x', 0, 'front'],
+      "up": ['y', -10, 'back'],
+      "down": ['y', 10, 'front'],
+      "left": ['x', -10, 'left'],
+      "right": ['x', 10, 'right'],
+      "idle": ['x', 0, 'idle'],
 
     }
   }
@@ -127,7 +49,7 @@ class Player {
   updatePosition(inputKeys) {
     console.log(inputKeys)
     console.log(this.directionUpdate[inputKeys])
-    const [axisProperty, changePixel, face] = this.directionUpdate[inputKeys || "stay"] // [key] : value pair //undefined if no or condition
+    const [axisProperty, changePixel, face] = this.directionUpdate[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
     this[axisProperty] += changePixel //this.x += changePixel
     this.faceAnimation = face
     // console.log(this.faceAnimation)
@@ -150,49 +72,52 @@ class Player {
 
   playerAnimateLoop(facing) {
     console.log(facing)
-    switch (facing) {
 
-      case 'front':             //front facing
-        this.playerFrameY = 0;
-        break
-      case 'right':
-        this.playerFrameY = 1; //right facing
-        break
-      case 'back':
-        this.playerFrameY = 2; //back facing
-        break
-      case 'left':
-        this.playerFrameY = 3; //left facing
-        break
-    }
-    console.log(this.playerFrameY)
+    // if (facing = 'idle') {
+    //   this.playerFrameY = 0; //left facing
+    //   this.playerFrameX = 0;
+    //   drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.x, this.y, this.playerWidthExt, this.playerHeightExt);
+    // }else {
 
-    if (this.playerFrameX < 3) {
-      this.playerFrameX++;            //loop throgh x-axis sprite
-    } else this.playerFrameX = 0;
+  switch (facing) {
 
-    // if (this.playerX < canvas_back.width + this.playerWidthExt) {
-    //   this.playerX += this.playerSpeed
-    // }else this.playerX = 0 + this.playerWidthExt
-
-    //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-    //drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.playerX, this.playerY, this.playerWidthExt, this.playerHeightExt);
-    drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.x, this.y, this.playerWidthExt, this.playerHeightExt);
+    case 'front':             //front facing
+      this.playerFrameY = 0;
+      break
+    case 'right':
+      this.playerFrameY = 1; //right facing
+      break
+    case 'back':
+      this.playerFrameY = 2; //back facing
+      break
+    case 'left':
+      this.playerFrameY = 3; //left facing
+      break
   }
+  console.log(this.playerFrameY)
 
-  draw() {
-    ctx_back.beginPath()
-    const x = this.x; // x coordinate
-    const y = this.y; // y coordinate
-    const radius = this.radius; // Arc radius
-    const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
-    const endAngle = Math.PI * 2; // End point on circle
-    const counterclockwise = false;
-    ctx_back.arc(x, y, radius, startAngle, endAngle, counterclockwise);
-    ctx_back.stroke()
-  }
+  if (this.playerFrameX < 3) {
+    this.playerFrameX++;            //loop throgh x-axis sprite
+  } else this.playerFrameX = 0;
+
+  //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+  drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.x, this.y, this.playerWidthExt, this.playerHeightExt);
 }
 
+
+draw() {
+  ctx_back.beginPath()
+  const x = this.x; // x coordinate
+  const y = this.y; // y coordinate
+  const radius = this.radius; // Arc radius
+  const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
+  const endAngle = Math.PI * 2; // End point on circle
+  const counterclockwise = false;
+  ctx_back.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+  ctx_back.stroke()
+}
+}
+/////////////////////////////////////////////////// ZOMBIES ///////////////////////////////////////////////////////
 let imagesZom = [];
 let imagesZomL = [];
 //imagesZom.length =10;
@@ -227,9 +152,7 @@ for (let g = 1; g <= 10; g++) {
 
 let j = 1 //for zombieLoop
 let p = 1 //for zombieLoop
-function drawSpriteZom(img, dX, dY, dW, dH) {
-  ctx_back.drawImage(img, dX, dY, dW, dH);
-}
+
 
 class Zombies {
   constructor(x, y, radius) {
@@ -241,8 +164,8 @@ class Zombies {
     this.velocity_y = ((player_.y - this.y) / 100);
     this.velocity_x = ((player_.x - this.x) / 100);
     this.color = 'green'
-    this.zomWidthExt = 84;
-    this.zomHeightExt = 84;
+    this.zomWidthExt = 72;   //72
+    this.zomHeightExt = 72;
     this.speed = 3
   }
 
@@ -292,7 +215,54 @@ class Zombies {
 
 }
 
+/////////////////////////////////////////////////// GameCoins ///////////////////////////////////////////////////////
 
+let imagesCoin = [];
+
+//push images for coin
+let l = 1
+for (let l = 1; l <= 30; l++) {
+  console.log(imagesCoin.length)
+  imagesCoin[l] = new Image();
+  imagesCoin[l].onload = () => {
+    isLoaded = true;
+    console.log(isLoaded)
+  }
+  imagesCoin[l].src = `./assets/gameCoins/Gold/Gold_${l.toString()}.png`
+  //console.log(i)
+  console.log(imagesCoin[l].src)
+}
+
+let frameCoins 
+
+class GameCoins extends Zombies{
+  constructor(x,y){
+  super(x, y)
+  this.radius = 6
+  this.coinWidthExt = 28;   //72
+  this.coinHeightExt = 28;
+  }
+
+  update() {
+    this.coinAnimateLoop()
+  }
+
+  coinAnimateLoop() {
+    if (frameCoins<30){
+      drawSpriteCoins(imagesCoin[frameCoins], this.x, this.y, this.coinWidthExt, this.coinHeightExt);
+      frameCoins ++
+    }else {
+      frameCoins = 1
+      drawSpriteCoins(imagesCoin[frameCoins], this.x, this.y, this.coinWidthExt, this.coinHeightExt)
+    }
+  }
+
+  coinTaken(){
+    //add one point
+    coinS.pop()                       //destroy the coin
+    coinReward = new GameCoins(x,y)  //Create new coin
+  }
+}
 
 console.log('working Objects')
 
