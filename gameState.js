@@ -5,7 +5,7 @@ canvas_back.height = window.innerHeight
 canvas_back.width = window.innerWidth
 
 const backgroundImg = new Image();
-backgroundImg.src = "./assets/PokeGoldDemo-SilentHills.png";
+//backgroundImg.src = "./assets/PokeGoldDemo-SilentHills.png";
 
 const imgPerson = new Image();
 imgPerson.src = "./assets/person.png";
@@ -41,11 +41,13 @@ let startGameLoop =  function () {
       ctx_back.clearRect(0, 0, canvas_back.width, canvas_back.height)
 
       //Draw background  
+      //ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
       ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
 
       //Draw Objects
       
       player_.update(directionInput.direction)
+      player_.draw()
       //player_.updatePosition(directionInput.direction)
       coinReward.update()
 

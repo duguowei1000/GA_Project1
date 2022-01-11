@@ -1,19 +1,22 @@
-img {
+/* img {
 	image-rendering: auto;
 	image-rendering: crisp-edges;
 	image-rendering: pixelated;
-	background-image: './assets/PokeGoldDemo-SilentHills.png';
-}
+	
+} */
 
 body{
 	margin:0px;
 }
 
 #canvas_back{
-	/* width: 100%; 
-	height: 100%;
-	border: 1px solid black;  */
+	width: 840px; 
+	height: 770px;
+	align-items:center;
+	background-size: contain;
+	border: 4px solid black; 
 	image-rendering: pixelated;
+	background-image: url("/assets/PokeGoldDemo-SilentHills.png");
 }
 
 

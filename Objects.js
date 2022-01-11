@@ -58,8 +58,8 @@ class Player {
 
   }
   drawImg() {
-    const x = this.x; // x coordinate
-    const y = this.y; // y coordinate
+    // const x = this.x ; // x coordinate
+    // const y = this.y ; // y coordinate
     //ctx_back.drawImage(imgPerson, x, y, 30, 40); //wait till img loaded
     this.playerAnimateLoop(this.faceAnimation)
 
@@ -72,6 +72,9 @@ class Player {
 
   playerAnimateLoop(facing) {
     console.log(facing)
+
+    const x = this.x -35 ; // x coordinate offset -35
+    const y = this.y -50; // y coordinate offset -50
 
     // if (facing = 'idle') {
     //   this.playerFrameY = 0; //left facing
@@ -101,7 +104,7 @@ class Player {
   } else this.playerFrameX = 0;
 
   //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-  drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.x, this.y, this.playerWidthExt, this.playerHeightExt);
+  drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, x, y, this.playerWidthExt, this.playerHeightExt);
 }
 
 
@@ -113,8 +116,11 @@ draw() {
   const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
   const endAngle = Math.PI * 2; // End point on circle
   const counterclockwise = false;
+  
+  //ctx_back.lineWidt
   ctx_back.arc(x, y, radius, startAngle, endAngle, counterclockwise);
-  ctx_back.stroke()
+  ctx_back.fill();
+  //ctx_back.stroke()
 }
 }
 /////////////////////////////////////////////////// ZOMBIES ///////////////////////////////////////////////////////
