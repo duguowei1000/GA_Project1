@@ -14,6 +14,9 @@ const imgZombie = new Image();
 imgZombie.src = "./assets/zombies.png";
 
 const directionInput = new DirectionInput();
+
+const scoreEl =document.querySelector('#scoreEL')
+console.log(scoreEl)
 ////
 
 const x = canvas_back.width / 2
@@ -32,6 +35,7 @@ const coinS = []
 const zombieS = []
 //const zom = new Zombies(300, 300)
 console.log('working gamestate')
+let score = 0
 let number = 0;
 let startGameLoop =  function () {
 
@@ -59,6 +63,7 @@ let startGameLoop =  function () {
           console.log('contacted')
           //alert('game end!')
         }
+        zom.draw()
         //zom.drawImg() 
       })
 
@@ -70,8 +75,12 @@ let startGameLoop =  function () {
         
         console.log(coinS)
         coinReward.coinTaken()
+        score += 100
+        
         //alert('game end!')
       }
+      //console.log(score)
+      scoreEl.innerText = score
 
       directionInput.initKeys()
       console.log(`Direction is :${directionInput.direction}`)
@@ -82,6 +91,7 @@ let startGameLoop =  function () {
       //console.log(number);
       number++
     }
+    
   //}
   // initiate Loop function
   setTimeout(() => {

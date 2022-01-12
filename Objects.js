@@ -189,9 +189,23 @@ class Zombies {
 
 
   }
+  draw() {
+    ctx_back.beginPath()
+    const x = this.x; // x coordinate
+    const y = this.y; // y coordinate
+    const radius = this.radius; // Arc radius
+    const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
+    const endAngle = Math.PI * 2; // End point on circle
+    const counterclockwise = false;
+    
+    //ctx_back.lineWidt
+    ctx_back.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+    ctx_back.fill();
+    //ctx_back.stroke()
+  }
   zombieAnimateLoop() {
-    let zomX = this.x; // x coordinate
-    let zomY = this.y; // y coordinate
+    let zomX = this.x-35; // x coordinate : offset-35
+    let zomY = this.y-50; // y coordinate : offset-50
 
     if (player_.x - this.x > 0) {
       if (j < 11) {
@@ -224,7 +238,6 @@ class Zombies {
 /////////////////////////////////////////////////// GameCoins ///////////////////////////////////////////////////////
 
 let imagesCoin = [];
-
 //push images for coin
 let l = 1
 for (let l = 1; l <= 30; l++) {
@@ -267,6 +280,7 @@ class GameCoins extends Zombies{
     //add one point
     coinS.pop()                       //destroy the coin
     coinReward = new GameCoins(x,y)  //Create new coin
+  
   }
 }
 
