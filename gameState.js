@@ -20,8 +20,9 @@ const startGamebtn = document.querySelector('#startGameBtn')
 const btnscreen = document.querySelector("#btnscreen")
 const bigscoreEl = document.querySelector("#bigscoreEl")
 
+
 ////Setting of FPS (GameSpeed)
-const FPS = 10;
+const FPS = 30;
 let prevTick = 0;
 ////////////////////////////
 
@@ -29,6 +30,9 @@ const x = canvas_back.width / 2
 console.log(x)
 const y = canvas_back.height / 2
 console.log(y)
+
+console.log(`canvaswidth ${canvas_back.width}`)
+console.log(`canvasheight ${canvas_back.height}`)
 
 //Distance between 2 objects (hypothenuse)
 function distHyp(objectOne, objectTwo) {
@@ -58,8 +62,15 @@ function init() {
 
 let startGameLoop = function () {
 
+  if (number <200){
   // initiate Loop function
   animationID = requestAnimationFrame(startGameLoop)
+
+  //fillRect()
+  // ctx_back.fillStyle = 'red';
+  // ctx_back.fillRect(20, 20, 300, 400);
+  // ctx_back.fillStyle = 'green';
+  // ctx_back.fillRect(200, 20, 150, 100);
 
   // clamp to fixed framerate
   let now = Math.round(FPS * Date.now() / 1000);  //Higher FPS magnifies this number faster
@@ -76,7 +87,7 @@ let startGameLoop = function () {
   //Draw Objects
 
   player_.update(directionInput.direction)
-  player_.draw()
+  //player_.draw()
   //player_.updatePosition(directionInput.direction)
   coinReward.update()
 
@@ -88,17 +99,17 @@ let startGameLoop = function () {
     const dist = distHyp(player_, zom)
     if (dist - zom.radius - player_.radius < 2) {
 
-      cancelAnimationFrame(animationID)
-      btnscreen.style.display = 'flex'
+      //cancelAnimationFrame(animationID)
+      //btnscreen.style.display = 'flex'
       bigscoreEl.innerText = score       //Update End score
     }
-    zom.draw() //draw black circle
+    //zom.draw() //draw black circle
     //zom.drawImg() 
   })
 
   //Coin reward
   const distCoinPlayer = distHyp(player_, coinReward)
-  console.log(distCoinPlayer)
+  // console.log(distCoinPlayer)
   if (distCoinPlayer - coinReward.radius - player_.radius < 20) {
     console.log('coinTaken')
 
@@ -113,7 +124,7 @@ let startGameLoop = function () {
   console.log(`Direction is :${directionInput.direction}`)
   //Add new zombies after X steps
   if (number % 20 === 0) {
-    zombieS.push(new Zombies(x, y))
+    zombieS.push(new Zombies(x,y))
   }
   //console.log(number);
   number++
@@ -123,6 +134,11 @@ let startGameLoop = function () {
   // setTimeout(() => {
   //   animationID = requestAnimationFrame(startGameLoop)},100)
   // console.log(animationID)
+  // console.log(`canvas width ${canvas_back.width}`)
+  // console.log(`canvas height ${canvas_back.height}`)
+
+  
+}
 
 }
 startGameLoop()

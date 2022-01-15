@@ -6,7 +6,18 @@
 } */
 
 body{
-	margin:0px;
+	margin:0 auto;
+}
+.base{
+	display: flex;
+	align-items: center;
+	align-items: flex-start;
+	align-content: stretch;
+	justify-content: center;
+	/* position:absolute; */
+	/* margin:0 auto; */
+	/* justify-content: space-between; */
+	/* left: 200px; */
 }
 
 .fixed{
@@ -14,12 +25,13 @@ body{
 }
 
 #counter{
-	float: right;
 	text-align: center;
-	/* position: absolute; */
-	margin-left: 10px;
 	background-color: white;
 	opacity: 0.8;
+	width: 250px;
+	/* float: right; */
+	/* position: center; */
+	/* margin-left: 100px; */
 	
 }
 span{
@@ -61,12 +73,17 @@ p{
 #canvas_back{
 	width: 840px; 
 	height: 770px;
-	align-items:center;
+	/* align-items:center; */
 	background-size: contain;
 	border: 4px solid black; 
 	image-rendering: pixelated;
 	/* background-image: url("/assets/PokeGoldDemo-SilentHills.png"); */
 	background-image: url("/assets/pokesilenthills.png");
+	/* display: block; */
+	margin-left: auto;
+	margin-right: auto;
+	/* width: 100%; */
+	position: absolute;
 }
 
 

@@ -18,8 +18,6 @@ const imagesX = {}
 imagesX.player = new Image();
 imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
 
-
-
 // player object
 class Player {
   constructor(x, y, radius) {
@@ -47,14 +45,24 @@ class Player {
   }
 
   updatePosition(inputKeys) {
-    console.log(inputKeys)
-    console.log(this.directionUpdate[inputKeys])
+    // console.log(inputKeys)
+    // console.log(this.directionUpdate[inputKeys])
+    // if(this.x <= canvas_back.width && this.x > 0){
     const [axisProperty, changePixel, face] = this.directionUpdate[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
-    this[axisProperty] += changePixel //this.x += changePixel
-    this.faceAnimation = face
-    // console.log(this.faceAnimation)
-    // console.log(axisProperty)
-    // console.log(changePixel)
+      this[axisProperty] += changePixel //this.x += changePixel
+      this.faceAnimation = face
+
+    console.log(this.faceAnimation)
+    console.log(this[axisProperty])
+    console.log(changePixel)
+  
+    // if(this.y < canvas_back.height){
+    //   this[axisProperty] += changePixel //this.x += changePixel
+    // }
+    
+
+    
+
 
   }
   drawImg() {
@@ -130,7 +138,7 @@ let imagesZomL = [];
 //console.log(imagesZom.length)
 
 //push images in //Right facing
-let k = 1
+//let k = 1
 for (let k = 1; k <= 10; k++) {
   console.log(imagesZom.length)
   imagesZom[k] = new Image();
@@ -143,7 +151,7 @@ for (let k = 1; k <= 10; k++) {
   console.log(imagesZom[k].src)
 }
 //left facing
-let g = 1
+//let g = 1
 for (let g = 1; g <= 10; g++) {
   console.log(imagesZomL.length)
   imagesZomL[g] = new Image();
@@ -159,14 +167,20 @@ for (let g = 1; g <= 10; g++) {
 let j = 1 //for zombieLoop
 let p = 1 //for zombieLoop
 
+function randomInner(min, max) { // min and max included 
+  return Math.floor(Math.random() * max) + min
+}
 
 class Zombies {
-  constructor(x, y, radius) {
-    let randomX = Math.floor(Math.random() * canvas_back.width)
-    let randomY = Math.floor(Math.random() * canvas_back.height)
-    this.x = randomX;
-    this.y = randomY;
-    this.radius = 10;
+  constructor(x, y, radius = 10) {
+    this.radius = radius;
+    let randomX = Math.floor(Math.random() * (canvas_back.width - 300)) +200
+    let randomY = Math.floor(Math.random() * (canvas_back.height -200)) +100
+    //let randomX = randomInner(500, canvas_back.width - 500)//Math.floor(Math.random() * canvas_back.width)
+    //let randomY = randomInner(500, canvas_back.height - 500)//Math.floor(Math.random() * canvas_back.height)
+    this.x = randomX//randomInner(200, canvas_back.width - 300) //randomX;
+    this.y = randomY//randomInner(200, canvas_back.height - 300)//randomY;
+    
     this.velocity_y = ((player_.y - this.y) / 100);
     this.velocity_x = ((player_.x - this.x) / 100);
     this.color = 'green'
@@ -193,6 +207,9 @@ class Zombies {
     ctx_back.beginPath()
     const x = this.x; // x coordinate
     const y = this.y; // y coordinate
+    // console.log(this.x)
+    // console.log(this.y)
+
     const radius = this.radius; // Arc radius
     const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
     const endAngle = Math.PI * 2; // End point on circle
@@ -254,10 +271,11 @@ for (let l = 1; l <= 30; l++) {
 
 let frameCoins 
 
-class GameCoins extends Zombies{
+class GameCoins{ //extends Zombies{
   constructor(x,y){
-  super(x, y)
   this.radius = 6
+  this.x = Math.floor(Math.random() * (canvas_back.width - this.radius)) +this.radius
+  this.y = Math.floor(Math.random() * (canvas_back.height - this.radius)) +this.radius
   this.coinWidthExt = 28;   //72
   this.coinHeightExt = 28;
   }
