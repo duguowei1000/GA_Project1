@@ -97,39 +97,70 @@ class Player {
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
     } else if (this.x > (rightEdge)) { //player beyond right edge
+      console.log(this.x)
       this.x = rightEdge - 10
       const [axisProperty, changePixel, face] = this.directionUpdate_X_axis_RightEdge[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
+      console.log(`inputkeys: ${inputKeys}`)
+      console.log(`>>>rightEdge: ${this.directionUpdate_X_axis_RightEdge}`)
+      console.log(`>>>>>>axisprop${axisProperty} >>>> changepixel${changePixel} >>>> face ${face}`)
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
     }else if (this.y < topEdge ) { //player beyond right edge
-      this.y = topEdge
+      this.y = 5
       const [axisProperty, changePixel, face] = this.directionUpdate_Y_axis_Top[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
     }else if (this.y >btmEdge){
-      this.y = btmEdge - 10
+      this.y = 900
       const [axisProperty, changePixel, face] = this.directionUpdate_Y_axis_Btm[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
 
     }
 
+    console.log(`inputkeys: ${inputKeys}`)
+// console.log(`>>>rightEdge: ${this.directionUpdate_X_axis_RightEdge}`)
+// console.log(`>>>>>>axisprop${axisProperty} >>>> changepixel${changePixel} >>>> face ${face}`)
+
+   //End Here
+
+///////////////////////Collision/////////////////////////////////////////////////////
+    //   console.log(map.isSpaceTaken(this.x, this.y, this.direction))
+    // if (map.isSpaceTaken(this.x, this.y, this.direction)) {
+    //   return;
+    //   }
+    //   const [axisProperty, changePixel, face] = this.directionUpdate[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
+    //   this[axisProperty] += changePixel //this.x += changePixel
+    //   this.faceAnimation = face
+////
   }
   drawImg() {
+    // const x = this.x ; // x coordinate
+    // const y = this.y ; // y coordinate
+    //ctx_back.drawImage(imgPerson, x, y, 30, 40); //wait till img loaded
     this.playerAnimateLoop(this.faceAnimation)
 
   }
   update(inputKeys) {
     
-    //freeze animation when undefined (grab previous frame) //Else play the frame
-    //console.log(`>>>typeof ${typeof(inputKeys)}`)
+    //freeze animation when undefined (grab previous frame)
+
+    console.log(`>>>typeof ${typeof(inputKeys)}`)
     if (typeof(inputKeys) === 'undefined'){
       console.log(`>>>>>>+1`)
       this.drawUndefinedFrame()
     }else{
       this.updatePosition(inputKeys)
       this.drawImg()
+
+
     }
+
+
+    //this.drawImgPrevFrame
+
+
+
   }
 
   playerAnimateLoop(facing) {
@@ -137,6 +168,12 @@ class Player {
 
     const x = this.x - 35; // x coordinate offset -35
     const y = this.y - 50; // y coordinate offset -50
+
+    // if (facing = 'idle') {
+    //   this.playerFrameY = 0; //left facing
+    //   this.playerFrameX = 0;
+    //   drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, this.x, this.y, this.playerWidthExt, this.playerHeightExt);
+    // }else {
 
     switch (facing) {
 
@@ -152,6 +189,9 @@ class Player {
       case 'left':
         this.playerFrameY = 3; //left facing
         break
+      // case 'idle':
+      //   this.playerFrameY = 0;
+      //   this.playerFrameX = 0;
     }
     console.log(this.playerFrameY)
 
@@ -171,6 +211,8 @@ class Player {
   drawUndefinedFrame(){
     const x = this.x - 35; // x coordinate offset -35
     const y = this.y - 50; // y coordinate offset -50
+
+
     drawSprite(imagesX.player, this.playerWidth * this.cachedFrameX, this.playerHeight * this.cachedFrameY, this.playerWidth, this.playerHeight, x, y, this.playerWidthExt, this.playerHeightExt);
   }
 

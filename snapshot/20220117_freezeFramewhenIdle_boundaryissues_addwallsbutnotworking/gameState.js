@@ -41,6 +41,17 @@ function distHyp(objectOne, objectTwo) {
 btnscreen.style.display = 'none'
 
 
+const map = new Map();
+map.walls = {
+    // [utils.asGridCoord(7,6)] : true,
+    // [utils.asGridCoord(8,6)] : true,
+    // [utils.asGridCoord(7,7)] : true,
+    // [utils.asGridCoord(8,7)] : true,
+    [utils.asGridCoord(126,350)] : true,
+    // [utils.asGridCoord(100,y)] : true,
+    //[126,350] : true,
+  }
+
 let player_ = new Player(x, y)
 let coinReward = new GameCoins(x, y)
 let coinS = []

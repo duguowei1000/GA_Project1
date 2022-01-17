@@ -78,7 +78,7 @@ p{
 	border: 4px solid black; 
 	image-rendering: pixelated;
 	/* background-image: url("/assets/PokeGoldDemo-SilentHills.png"); */
-	background-image: url("./assets/pokesilenthills.png");
+	background-image: url("/assets/pokesilenthills.png");
 	/* display: block; */
 	margin-left: auto;
 	margin-right: auto;
