@@ -16,28 +16,48 @@
 <body>
 
     <div class="base">
+        <canvas id="canvas_Start"></canvas>
         <!-- style="left:200px ;top:0px;" -->
         <!-- <div id="counter">Score :</div> -->
         <canvas id="canvas_back"></canvas>
-        <!-- <canvas id="canvas_back" width="" height="" style="position:absolute;"></canvas> -->
-        <!-- <canvas id="canvas_front" width="" height="" style="position:absolute;"></canvas> -->
+        <!-- <canvas id="canvas_ back" width="" height="" style="position:absolute;"></canvas> -->
         <div class="fixed">
-        </div>
-        <div id="counter">
-            <span>Score :</span><span id="scoreEL">0</span>
-        </div>
-    </div>
-
-    <div class="fixed buttonscreen" id="btnscreen">
-        <div class='bg-white'>
-            <h1 class='scoreInbutton' id="bigscoreEl">5</h1>
-            <p>Points</p>
-            <div>
-                <button class="startButton" id="startGameBtn">Start Game</button>
+            <div id="counter">
+                <span>Score :</span><span id="scoreEL">0</span>
             </div>
         </div>
 
+        <div class="fixed avatarScreen" id="avatar_screen">
+            <div class='avatar_button'>
+                <p>Choose your Player</p>
+                <div>
+                    <button class="playerButton" id="firstPlayerSelect">Player1</button>
+                    <button class="playerButton" id="2ndPlayerSelect">Player2</button>
+                </div>
+                <!-- <div>
+                    <button class="playerButton" id="2ndPlayerSelect">Player2</button>
+                </div> -->
+            </div>
+
+        </div>
+        <!-- <div class="fixed"> -->
+
+        <!-- </div> -->
+        <div class="fixed buttonscreen" id="btnscreen">
+            <div class='bg-white'>
+                <h1 class='scoreInbutton' id="bigscoreEl">5</h1>
+                <p>Points</p>
+                <div>
+                    <button class="startButton" id="startGameBtn">Start Game</button>
+                    <button class="backFirstpgbtn" id="backFirstpgbtn">Back to Home</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
 
     <!-- <img src="./assets/PokeGoldDemo-SilentHills.png" alt="silent hill" width="500" height="600">
          -->
