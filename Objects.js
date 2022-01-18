@@ -13,9 +13,7 @@ function drawSpriteCoins(img, dX, dY, dW, dH) {
 
 /////////////////////////////////////////////////// PLAYER ///////////////////////////////////////////////////////
 
-//Player animation frames from Sprite
 const imagesX = {}
-
 imagesX.player = new Image();
 imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
 

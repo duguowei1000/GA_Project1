@@ -24,8 +24,11 @@ const startGamebtn = document.querySelector('#startGameBtn')
 const backFirstpgbtn = document.querySelector('#backFirstpgbtn')
 const btnscreen = document.querySelector("#btnscreen")
 const bigscoreEl = document.querySelector("#bigscoreEl")
-const avatar_screen = document.querySelector("#avatar_screen")
 
+const avatar_screen = document.querySelector("#avatar_screen")
+const firstPlayerSelect = document.querySelector("#firstPlayerSelect")
+const secondPlayerSelect = document.querySelector("#secondPlayerSelect")
+const avatar_startGame = document.querySelector("#avatar_startGame")
 // avatar_screen.style.display = 'flex'
 ////Setting of FPS (GameSpeed)
 const FPS = 30;
@@ -199,7 +202,7 @@ switch (gameScene) {
 }
 chooseScene(gameScene)
 // setTimeout(() => { chooseScene(2)},4000)
- setTimeout(() => { chooseScene(2)},2000)
+ //setTimeout(() => { chooseScene(2)},2000)
 
 //startGameLoop
 //Show end game prompt
@@ -211,9 +214,24 @@ startGamebtn.addEventListener("click", () => {
   startGameLoop()
 })
 
+avatar_startGame.addEventListener("click", () => {
+  //btnscreen.style.display = "none"
+  chooseScene(2)
+})
 
 backFirstpgbtn.addEventListener("click", () => {
   init()
   btnscreen.style.display = "none"
   chooseScene(1)  //back to home page
+})
+
+firstPlayerSelect.addEventListener("click", () => {
+  //Player animation frames from Sprite
+imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+})
+
+secondPlayerSelect.addEventListener("click", () => {
+  //Player animation frames from Sprite
+imagesX.player.src = './assets/people/npc1.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+
 })
