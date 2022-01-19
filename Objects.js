@@ -1,3 +1,6 @@
+function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+}
 
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
   ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);

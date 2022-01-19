@@ -1,6 +1,9 @@
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
+const canvas_start = document.getElementById('canvas_start');
+const ctx_start = canvas_start.getContext('2d')
+
 canvas_back.height = window.innerHeight
 canvas_back.width = window.innerWidth
 
@@ -72,9 +75,21 @@ function init() {
   score = 0
   number = 0;
 }
+const startPlayer1 = {}
+startPlayer1.img = new Image();
+const startPlayer2 = {}
+startPlayer2.img = new Image();
+const playerWidth = '32';       //per sprite width px based on sheet
+const playerHeight = '32';     //per sprite height px based on sheet
+const playerWidthExt = 84;         //stretch the player size
+const playerHeightExt = 84;        //stretch the player size
+let FrameX = 3;            //which sprite in sprite sheet
+let FrameY = 0;            //which sprite in sprite sheet
 
 counter.style.display = 'none'
 //////////////////// start page /////////////////////////////
+let player1EventTriggered = false
+let player2EventTriggered = false
 let firstPageLoop = function () {
 
   //DOM
@@ -82,6 +97,14 @@ let firstPageLoop = function () {
   avatar_screen.style.display = 'flex'
   
   animationID_firstPage = requestAnimationFrame(firstPageLoop)  //for killing the frame next time
+  startPlayer1.img.src = './assets/people/npc3.png'
+  startPlayer2.img.src = './assets/people/npc1.png'
+  if(!player1EventTriggered){
+  ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+  }
+  if(!player2EventTriggered){
+  ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+  }
   ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
   
 }
@@ -99,16 +122,9 @@ let startGameLoop = function () {
   //DOM
   avatar_screen.style.display = 'none'
   
-
   if (number < 200) {
     // initiate Loop function
     animationID = requestAnimationFrame(startGameLoop)
-
-    //fillRect()
-    // ctx_back.fillStyle = 'red';
-    // ctx_back.fillRect(20, 20, 300, 400);
-    // ctx_back.fillStyle = 'green';
-    // ctx_back.fillRect(200, 20, 150, 100);
 
     // clamp to fixed framerate
     let now = Math.round(FPS * Date.now() / 1000);  //Higher FPS magnifies this number faster
@@ -132,9 +148,6 @@ let startGameLoop = function () {
 
     console.log(player_.x)
     console.log(player_.y)
-
-
-
 
     zombieS.forEach((zom) => {
       zom.update()
@@ -235,3 +248,74 @@ secondPlayerSelect.addEventListener("click", () => {
 imagesX.player.src = './assets/people/npc1.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
 
 })
+
+
+
+const FPS2 = 30;
+let prevTick2 = 0;
+let animationID_player2 
+let now2
+secondPlayerSelect.addEventListener("mouseover", () => {
+  startPlayer2.img.src = './assets/people/npc1.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+  //document.getElementById('secondPlayerSelect').innerHTML = '<img width="100" height="100" src="./assets/people/npc1.png">'
+  let player2Loop = function () {
+    // let now2 = Math.round(FPS2 * Date.now() / 1000);  //Higher FPS magnifies this number faster
+    // if (now2 === prevTick2) return;  //prematurely repeat loop if time is rounded to same
+    // prevTick2 = now2;               //else update the tick
+
+    animationID_player2 = requestAnimationFrame(player2Loop)
+    ctx_start.clearRect(0, 0, canvas_back.width, canvas_back.height)  
+    if (FrameX < 3) {
+      FrameX++;            //loop throgh x-axis sprite
+    } else FrameX = 0;
+    FrameY = 0
+    player2EventTriggered = true
+    ctx_start.drawImage(startPlayer1.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    
+    }
+  player2Loop()
+
+})
+
+secondPlayerSelect.addEventListener("mouseleave", () => {
+  startPlayer2.img.src = './assets/people/npc1.png'
+    cancelAnimationFrame(animationID_player2) //cancel playerSelectRoute
+    FrameX = 0
+    FrameY = 0
+    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    player2EventTriggered = false
+})
+
+firstPlayerSelect.addEventListener("mouseover", () => {
+  // startPlayer2.img.src = './assets/people/npc1.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+  //document.getElementById('secondPlayerSelect').innerHTML = '<img width="100" height="100" src="./assets/people/npc1.png">'
+  let player1Loop = function () {
+    // let now2 = Math.round(FPS2 * Date.now() / 1000);  //Higher FPS magnifies this number faster
+    // if (now2 === prevTick2) return;  //prematurely repeat loop if time is rounded to same
+    // prevTick2 = now2;               //else update the tick
+
+    animationID_player1 = requestAnimationFrame(player1Loop)
+    ctx_start.clearRect(0, 0, canvas_back.width, canvas_back.height)  
+    if (FrameX < 3) {
+      FrameX++;            //loop throgh x-axis sprite
+    } else FrameX = 0;
+    FrameY = 0
+    player1EventTriggered = true
+  
+    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer2.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    }
+  player1Loop()
+
+})
+
+firstPlayerSelect.addEventListener("mouseleave", () => {
+  // startPlayer1.img.src = './assets/people/npc3.png'
+    cancelAnimationFrame(animationID_player1) //cancel playerSelectRoute
+    FrameX = 0
+    FrameY = 0
+    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+    player1EventTriggered = false
+})
+
