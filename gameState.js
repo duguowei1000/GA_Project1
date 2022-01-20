@@ -34,7 +34,7 @@ const secondPlayerSelect = document.querySelector("#secondPlayerSelect")
 const avatar_startGame = document.querySelector("#avatar_startGame")
 // avatar_screen.style.display = 'flex'
 ////Setting of FPS (GameSpeed)
-const FPS = 30;
+const FPS = 20;
 let prevTick = 0;
 ////////////////////////////
 
@@ -126,7 +126,7 @@ let startGameLoop = function () {
   //DOM
   avatar_screen.style.display = 'none'
   
-  if (number < 200) {
+  //if (number < 200) {
     // initiate Loop function
     animationID = requestAnimationFrame(startGameLoop)
 
@@ -198,7 +198,7 @@ let startGameLoop = function () {
     // console.log(`canvas height ${canvas_back.height}`)
 
 
-  }
+  //}
 
 }
 
@@ -328,6 +328,7 @@ firstPlayerSelect.addEventListener("click", () => {
 
   if(toggleON === true){
     firstPlayerSelect.style.border = "3px solid #76F96D"
+    secondPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility= "visible"
     console.log(">>>ToggleTrue")
   }else{
@@ -345,6 +346,7 @@ secondPlayerSelect.addEventListener("click", () => {
 
   if(toggleON === true){
     secondPlayerSelect.style.border = "3px solid #FBED64"
+    firstPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility= "visible"
     console.log(">>>ToggleTrue")
   }else{

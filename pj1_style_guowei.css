@@ -1,10 +1,8 @@
-/* img {
-	image-rendering: auto;
-	image-rendering: crisp-edges;
-	image-rendering: pixelated;
-	
-} */
-
+@font-face {
+    font-family: myFirstFont;
+    src: url(./assets/spooky-strikes/Spooky\ Strikes\ -\ TTF.ttf);
+}
+  
 body{
 
 }
@@ -20,6 +18,20 @@ body{
 	/* left: 200px; */
 }
 
+.title1{
+	font-family: myFirstFont;
+	position: fixed;
+	margin-top: -260px;
+	font-size: 90px;
+	color: black;
+}
+.title2{
+	font-family: myFirstFont;
+	position: fixed;
+	margin-top: -150px;
+	font-size: 90px;
+
+}
 .fixed{
 	position:fixed;
 }
