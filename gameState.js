@@ -90,6 +90,8 @@ counter.style.display = 'none'
 //////////////////// start page /////////////////////////////
 let player1EventTriggered = false
 let player2EventTriggered = false
+
+
 let firstPageLoop = function () {
 
   //DOM
@@ -106,6 +108,8 @@ let firstPageLoop = function () {
   ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
   }
   ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
+
+  
   
 }
 
@@ -227,10 +231,6 @@ startGamebtn.addEventListener("click", () => {
   startGameLoop()
 })
 
-avatar_startGame.addEventListener("click", () => {
-  //btnscreen.style.display = "none"
-  chooseScene(2)
-})
 
 backFirstpgbtn.addEventListener("click", () => {
   init()
@@ -238,6 +238,8 @@ backFirstpgbtn.addEventListener("click", () => {
   chooseScene(1)  //back to home page
 })
 
+
+//Choose player
 firstPlayerSelect.addEventListener("click", () => {
   //Player animation frames from Sprite
 imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
@@ -319,3 +321,48 @@ firstPlayerSelect.addEventListener("mouseleave", () => {
     player1EventTriggered = false
 })
 
+let toggleON = false
+firstPlayerSelect.addEventListener("click", () => {
+  toggleON = !toggleON
+  console.log(toggleON)
+
+  if(toggleON === true){
+    firstPlayerSelect.style.border = "3px solid #76F96D"
+    avatar_startGame.style.visibility= "visible"
+    console.log(">>>ToggleTrue")
+  }else{
+    firstPlayerSelect.style.border = "none"
+    avatar_startGame.style.visibility= "hidden"
+
+    console.log(">>>ToggleFalse")
+  }   
+
+})
+
+secondPlayerSelect.addEventListener("click", () => {
+  toggleON = !toggleON
+  console.log(toggleON)
+
+  if(toggleON === true){
+    secondPlayerSelect.style.border = "3px solid #FBED64"
+    avatar_startGame.style.visibility= "visible"
+    console.log(">>>ToggleTrue")
+  }else{
+    secondPlayerSelect.style.border = "none"
+    avatar_startGame.style.visibility= "hidden"
+
+    console.log(">>>ToggleFalse")
+  }   
+
+})
+
+//Start game button when clicked
+avatar_startGame.addEventListener("click", () => {
+  //reset 1st page///
+  toggleON = false
+  firstPlayerSelect.style.border = "none"
+  secondPlayerSelect.style.border = "none"
+  avatar_startGame.style.visibility= "hidden"
+  // proceed to Game
+  chooseScene(2)
+})
