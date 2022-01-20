@@ -50,6 +50,7 @@ span{
 
 .avatarScreen{	
 	margin: 400px;
+	justify-content: space-around;
 
 }
 
@@ -61,16 +62,16 @@ span{
 }
 
 .avatar_button{
-	background-color: gray;
 	width: 350px;
-	padding: 10px;
-	text-align: center;
+	margin-left: 150px; 
+	opacity: 80%;
 }
 .scoreInbutton{
 	font-size: 40px;
 	font: bold;
 }
 p{
+	margin-left: 30px;
 	font-size: small;
 	color: white;
 	font-size: 20px;
@@ -106,7 +107,7 @@ p{
 
 /* playselection */
 #canvas_start{
-	margin-top: 100px;
+	margin-top: 20px;
 	margin-left: 100px;
 	width: 200px; 
 	height: 200px;
@@ -129,3 +130,49 @@ p{
 	font-size: 30px;
 }
 
+#firstPlayerSelect{
+	background-color: transparent;
+	color: black;
+	/* border: black; */
+	border-width: 2px;
+	transition-duration: 0.4s;
+	width: 100px;
+	height: 70px;
+
+}
+#firstPlayerSelect:hover {
+	background-color: transparent;
+	color: black;
+	border: solid #76F96D;
+  }
+
+#secondPlayerSelect{
+	background-color: transparent;
+	color: black;
+	/* border: black; */
+	border-width: 2px;
+	transition-duration: 0.4s;
+	width: 100px;
+	height: 70px;
+
+}
+#secondPlayerSelect:hover{
+	background-color: transparent;
+	color: black;
+	border: solid #FBED64 ;
+}
+
+#avatar_startGame{
+	background-color: #F8CB63;
+	color: black;
+	border: solid black;
+	transition-duration: 0.4s;
+	width: 100px;
+	height: 50px;
+	border-radius: 20px;
+
+}
+
+#startGameDiv{
+	margin-top: 200px;;
+}

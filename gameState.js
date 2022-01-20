@@ -100,10 +100,10 @@ let firstPageLoop = function () {
   startPlayer1.img.src = './assets/people/npc3.png'
   startPlayer2.img.src = './assets/people/npc1.png'
   if(!player1EventTriggered){
-  ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+  ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 40, 0, playerWidthExt, playerHeightExt)
   }
   if(!player2EventTriggered){
-  ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+  ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
   }
   ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
   
@@ -270,8 +270,8 @@ secondPlayerSelect.addEventListener("mouseover", () => {
     } else FrameX = 0;
     FrameY = 0
     player2EventTriggered = true
-    ctx_start.drawImage(startPlayer1.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
-    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer1.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 40, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
     
     }
   player2Loop()
@@ -283,7 +283,7 @@ secondPlayerSelect.addEventListener("mouseleave", () => {
     cancelAnimationFrame(animationID_player2) //cancel playerSelectRoute
     FrameX = 0
     FrameY = 0
-    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
     player2EventTriggered = false
 })
 
@@ -303,8 +303,8 @@ firstPlayerSelect.addEventListener("mouseover", () => {
     FrameY = 0
     player1EventTriggered = true
   
-    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
-    ctx_start.drawImage(startPlayer2.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 200, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 40, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer2.img, playerWidth * 0, playerHeight * 0, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
     }
   player1Loop()
 
@@ -315,7 +315,7 @@ firstPlayerSelect.addEventListener("mouseleave", () => {
     cancelAnimationFrame(animationID_player1) //cancel playerSelectRoute
     FrameX = 0
     FrameY = 0
-    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 0, 0, playerWidthExt, playerHeightExt)
+    ctx_start.drawImage(startPlayer1.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 40, 0, playerWidthExt, playerHeightExt)
     player1EventTriggered = false
 })
 
