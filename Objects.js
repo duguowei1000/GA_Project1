@@ -1,7 +1,6 @@
-function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
-  ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-}
-
+//Draw Sprite functions
+//(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+//sx & sy coordinate of source img // dx dy coordinate of top-left corner // dwidth dHeight destination scaled img
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
   ctx_back.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
 }
@@ -18,7 +17,7 @@ function drawSpriteCoins(img, dX, dY, dW, dH) {
 
 const imagesX = {}
 imagesX.player = new Image();
-imagesX.player.src = './assets/people/npc3.png'//'./assets/AdventurerSpriteSheetv1.1.png' //'./assets/cuphead.png'
+imagesX.player.src = './assets/people/npc3.png'//Default player image if no player chosen
 
 
 // player object
@@ -38,10 +37,10 @@ class Player {
     this.playerFrameY = 0;            //which sprite in sprite sheet
     this.faceAnimation = []           //contains facing of player
 
-    this.cachedFrameX =0
-    this.cachedFrameY =0
+    this.cachedFrameX = 0
+    this.cachedFrameY = 0
 
-    //if(this.x <= canvas_back.width && this.x > 0)
+    //Setting the contraints when beyond edges
     this.directionUpdate_X_axis_RightEdge = {
       "up": ['y', -10, 'back'],
       "down": ['y', 10, 'front'],
@@ -57,7 +56,7 @@ class Player {
       "idle": ['x', 0, 'idle'],
 
     }
-    //if(this.y <= canvas_back.width && this.y > 0)
+
     this.directionUpdate_Y_axis_Top = {
       //"up": ['y', -10, 'back'],
       "down": ['y', 10, 'front'],
@@ -85,9 +84,9 @@ class Player {
 
   updatePosition(inputKeys) {
     // console.log(this.directionUpdate[inputKeys])
-// start here boundary 
+    // start here boundary 
 
-    if (this.x < canvas_back.width && this.x > 0 && this.y < canvas_back.height && this.y >0) { //within the edges
+    if (this.x < canvas_back.width && this.x > 0 && this.y < canvas_back.height && this.y > 0) { //within the edges
       const [axisProperty, changePixel, face] = this.directionUpdate[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
@@ -102,12 +101,12 @@ class Player {
       const [axisProperty, changePixel, face] = this.directionUpdate_X_axis_RightEdge[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
-    }else if (this.y < topEdge ) { //player beyond right edge
+    } else if (this.y < topEdge) { //player beyond right edge
       this.y = topEdge
       const [axisProperty, changePixel, face] = this.directionUpdate_Y_axis_Top[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
-    }else if (this.y >btmEdge){
+    } else if (this.y > btmEdge) {
       this.y = btmEdge - 10
       const [axisProperty, changePixel, face] = this.directionUpdate_Y_axis_Btm[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
       this[axisProperty] += changePixel //this.x += changePixel
@@ -121,13 +120,13 @@ class Player {
 
   }
   update(inputKeys) {
-    
+
     //freeze animation when undefined (grab previous frame) //Else play the frame
     //console.log(`>>>typeof ${typeof(inputKeys)}`)
-    if (typeof(inputKeys) === 'undefined'){
-      console.log(`>>>>>>+1`)
+    if (typeof (inputKeys) === 'undefined') {
+      //console.log(`>>>>>>+1`)
       this.drawUndefinedFrame()
-    }else{
+    } else {
       this.updatePosition(inputKeys)
       this.drawImg()
     }
@@ -163,13 +162,12 @@ class Player {
     //cache last frame for "undefined"
     this.cachedFrameY = this.playerFrameY
     this.cachedFrameX = this.playerFrameX
-    //this.isCached = true
 
     //drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
     drawSprite(imagesX.player, this.playerWidth * this.playerFrameX, this.playerHeight * this.playerFrameY, this.playerWidth, this.playerHeight, x, y, this.playerWidthExt, this.playerHeightExt);
   }
 
-  drawUndefinedFrame(){
+  drawUndefinedFrame() {
     const x = this.x - 35; // x coordinate offset -35
     const y = this.y - 50; // y coordinate offset -50
     drawSprite(imagesX.player, this.playerWidth * this.cachedFrameX, this.playerHeight * this.cachedFrameY, this.playerWidth, this.playerHeight, x, y, this.playerWidthExt, this.playerHeightExt);
@@ -247,7 +245,7 @@ class Zombies {
     this.zomHeightExt = 72;
     this.speed = 3
   }
-
+  //to keep speed of zombie constant
   speedMultiplier() {
     let dist_ = Math.hypot(player_.x - this.x, player_.y - this.y) //dist bet player and zombie
     let multiplier = this.speed / dist_ //distance is varying , speed is constant
@@ -260,21 +258,17 @@ class Zombies {
     this.x = this.x + this.speedMultiplier() * (player_.x - this.x)  //chasing player in x-axis
     this.zombieAnimateLoop()   //update image location
 
-
   }
   draw() {
     ctx_back.beginPath()
     const x = this.x; // x coordinate
     const y = this.y; // y coordinate
-    // console.log(this.x)
-    // console.log(this.y)
 
     const radius = this.radius; // Arc radius
     const startAngle = Math.PI * 0; // Starting point on circle //0 is at right horizontal
     const endAngle = Math.PI * 2; // End point on circle
     const counterclockwise = false;
 
-    //ctx_back.lineWidt
     ctx_back.arc(x, y, radius, startAngle, endAngle, counterclockwise);
     ctx_back.fill();
     //ctx_back.stroke()
@@ -303,12 +297,8 @@ class Zombies {
         p = 1
         drawSpriteZom(imagesZomL[p], zomX, zomY, this.zomWidthExt, this.zomHeightExt);
       }
-
     }
-
   }
-  //ctx_back.drawImage(imgZombie, x, y, 50, 50); //wait till img loaded //50,50 for size
-
 }
 
 /////////////////////////////////////////////////// GameCoins ///////////////////////////////////////////////////////
@@ -354,14 +344,13 @@ class GameCoins { //extends Zombies{
   }
 
   coinTaken() {
-    //add one point
     coinS.pop()                       //destroy the coin
     coinReward = new GameCoins(x, y)  //Create new coin
 
   }
 }
 
-console.log('working Objects')
+// console.log('working Objects')
 
 
 

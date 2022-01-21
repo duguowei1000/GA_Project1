@@ -1,35 +1,37 @@
-# GA_Project1
-GA_Project1
-
-
-1) Map (using canvas) // consider using SVG?
-
-2a) Person walking  (animations)
-2b) Enemies chasing (animations)
-
-3) Explosions
-
-4) walls and collisions
-
-5) Bonuses
+# GA_Project1 - Zombie Land
 
 //Summary
-
-dubloon disaster 
-https://www.youtube.com/watch?v=9fouXWegls0&t=2053s
 
 * Hostiles spawn at central area
 * Hostiles attract towards the user 
 * Once enemies touch user, user dies
-* Some speed modifier for hostiles
 * User navigation via keypress or mouse
-* Keypress -> ability to move front only, change bearing via left and right key
-* User needs to navigate to get treasure, after certain no. of coins, ability to kill hostiles
+* User needs to navigate to get treasure
 * speed modifier for hostiles increase based on timer.
 
-Issues
-* How to have multiple objects tracking user at the same time
+Approach/Technologies used
 
-Bonus
-Fog of war + tracking camera(zoom)
+1) DOM manipulation. (Buttons -onclick/mouseover/mouseleave)
+2) Map (using canvas library)
+3a) Person walking  (animations using canvas drawimg function)
+3b) Enemies chasing (animations using canvas drawimg function)
+-forEach zombie
+4) Game loop 
+-requestAnimationFrame(animationID) && cancelAnimationFrame(animationID)
+-clearRect() :clear map	
+-drawImage() :map
+5) coinS.pop() //destroy coin
+6) walls and collisions
+
+Issues resolved
+* How to have multiple objects tracking user at the same time
+* Zombie speed varying as a function of distance between the player and zombie. Multiplier added to keep speed of zombie constant
+
+5) Bonuses (future)
+
+* consider using SVG?
+* Some speed modifier for hostiles
+* Keypress -> ability to move front only, change bearing via left and right key
+* after certain no. of coins, ability to kill zombies
+* Fog of war + tracking camera(zoom)
 https://pothonprogramming.github.io/content/tile-scroll/tile-scroll.html
