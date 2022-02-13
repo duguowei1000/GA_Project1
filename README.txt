@@ -1,4 +1,4 @@
-# GA_Project1 - Zombie Land
+# Zombie Land
 
 //Summary
 
