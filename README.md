@@ -1,4 +1,5 @@
-# GA_Project1 - Zombie Land
+# Zombie Land
+Website: https://duguowei1000.github.io/ZombieLand-Game/
 
 //Summary
 
@@ -34,4 +35,3 @@ Issues resolved
 * Keypress -> ability to move front only, change bearing via left and right key
 * after certain no. of coins, ability to kill zombies
 * Fog of war + tracking camera(zoom)
-https://pothonprogramming.github.io/content/tile-scroll/tile-scroll.html
