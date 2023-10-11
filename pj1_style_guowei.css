@@ -177,3 +177,12 @@ p2{
 #startGameDiv{
 	margin-top: 200px;;
 }
+
+.bc {
+    position: fixed;
+    top: 16px;
+    right: 300px;
+    z-index: 100;
+    
+  }
+  
