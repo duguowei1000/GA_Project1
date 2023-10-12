@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="pj1_style_guowei.css">
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="pj1_style_guowei.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="http://calebevans.me/projects/jcanvas/resources/jcanvas/jcanvas.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@latest/dist/index.browser.js"></script>
-</head>
+  </head>
 
-<body>
-
+  <body>
+    
     <div class="base">
-        <canvas id="canvas_back"></canvas>
-        <div class="fixed">
-            <div id="counter">
-                <span>Score :</span><span id="scoreEL">0</span>
-            </div>
-        </div>
-        <div class="bc">
-            <bc-button>hey</bc-button>
-          </div>
-        <div class="fixed avatarScreen" id="avatar_screen">
-            <div class="title1"> Zombie</div>
-            <div class="title2"> Land</div>
+    
+      <canvas id="canvas_back"></canvas>
+      <div class="fixed">
+        <div id="counter"><span>Score :</span><span id="scoreEL">0</span></div>
+      </div>
 
-            <canvas id="canvas_start"></canvas>
-            <div class='fixed avatar_button'>
-                <p>Choose your Player</p>
-                <div>
-                    <button class="playerButton" id="firstPlayerSelect"></button>
-                    <button class="playerButton" id="secondPlayerSelect"></button>
-                </div>
-            </div>
-            <div class="fixed" id="startGameDiv">
-                <button class="playerButton" id="avatar_startGame">Start Game</button>
-            </div>
+      <div class="fixed avatarScreen" id="avatar_screen">
+        <div class="title1">Zombie</div>
+        <div class="title2">Land</div>
+
+        <canvas id="canvas_start"></canvas>
+        <div class="fixed avatar_button">
+          <p>Choose your Player</p>
+          <div>
+            <button class="playerButton" id="firstPlayerSelect"></button>
+            <button class="playerButton" id="secondPlayerSelect"></button>
+          </div>
         </div>
-        <div class="fixed buttonscreen" id="btnscreen">
-            <div class='bg-white'>
-                <h1 class='scoreInbutton' id="bigscoreEl">5</h1>
-                <p2>Points</p2>
-                <div>
-                    <button class="startButton" id="startGameBtn">Start Game</button>
-                    <button class="backFirstpgbtn" id="backFirstpgbtn">Back to Home</button>
-                </div>
-            </div>
+        <div class="fixed" id="startGameDiv">
+          <button class="playerButton" id="avatar_startGame">Start Game</button>
         </div>
+        <div class="donate">
+            Donate here
+          </div>
+          <div class="bc">
+            <bc-button></bc-button>
+          </div>
+      </div>
+      <div class="fixed buttonscreen" id="btnscreen">
+        <div class="bg-white">
+          <h1 class="scoreInbutton" id="bigscoreEl">5</h1>
+          <p2>Points</p2>
+          <div>
+            <button class="startButton" id="startGameBtn">Start Game</button>
+            <button class="backFirstpgbtn" id="backFirstpgbtn">
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="keyPressDirectionInput.js"></script>
     <script src="Objects.js"></script>
     <script src="gameState.js"></script>
-</body>
-
+  </body>
 </html>

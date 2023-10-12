@@ -179,10 +179,21 @@ p2{
 }
 
 .bc {
-    position: fixed;
-    top: 16px;
-    right: 300px;
-    z-index: 100;
+
+	display: flex;
+	/* justify-content: center; */
+	position: fixed;
+	margin-top: -330px;
+	font-size: 90px;
+	color: black;
     
   }
-  
+.donate{
+
+	display: flex;
+	/* justify-content: center; */
+	position: fixed;
+	margin-top: -380px;
+	font-size: 30px;
+	color: rgb(221, 173, 0);
+}
