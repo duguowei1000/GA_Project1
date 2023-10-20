@@ -1,0 +1,4 @@
+name: Deployment
+jobs:
+  deployment:
+    environment: github-pages
