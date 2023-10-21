@@ -9,6 +9,7 @@ on:
     branches: [ "main" ]
 
 jobs:
+  runs-on: ubuntu-latest
   deployment:
     environment: github-pages
     steps:
