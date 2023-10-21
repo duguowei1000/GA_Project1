@@ -1,4 +1,6 @@
 name: Deployment
+    #   environment: 
+    #     name: github-pages
 env:
   NAME: 'Snyk Demo'
   super_secret: ${{ secrets.ALBYNODE }}
@@ -12,6 +14,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Print name
         run: echo "Hello $NAME"
