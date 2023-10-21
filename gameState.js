@@ -203,8 +203,6 @@ function chooseScene(gameScene) {
   switch (gameScene) {
 
     case 1: firstPageLoop()
-      console.log(">>>>firstpage")
-      console.log(ALBYTOKEN)
       break
     case 2:
       cancelAnimationFrame(animationID_firstPage) //cancel first page loop
