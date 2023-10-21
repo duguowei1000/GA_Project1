@@ -1,3 +1,4 @@
+const ALBYTOKEN = process.env.ALBYNODE
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
@@ -204,6 +205,7 @@ function chooseScene(gameScene) {
 
     case 1: firstPageLoop()
       console.log(">>>>firstpage")
+      console.log(ALBYTOKEN)
       break
     case 2:
       cancelAnimationFrame(animationID_firstPage) //cancel first page loop
