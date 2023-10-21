@@ -15,7 +15,7 @@ jobs:
       - name: Print name
         run: echo "Hello $NAME"
       - name: Print certificate
-        run: echo "$ { secrets.ALBYNODE }  "
+        run: echo "$ {{ secrets.ALBYNODE }}  " | base64 --decode
     # deployment:
     #   environment: 
     #     name: github-pages
