@@ -1,5 +1,15 @@
 require('dotenv').config()
 // import 'dotenv/config'
+const fs = require('fs');
+const got = require('got');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const document = new JSDOM(response.body);
+
+const express = require("express"); //from documentation: express is function
+const app = express(); //app is an object
+const PORT = 3002;
+
 console.log(process.env.ALBYNODE) 
 
 const canvas_back = document.getElementById('canvas_back');
@@ -364,3 +374,8 @@ avatar_startGame.addEventListener("click", () => {
   // proceed to Game
   chooseScene(2)
 })
+
+//? Start
+app.listen(PORT, () => {
+  console.log("Server is running on port " + PORT);
+});
