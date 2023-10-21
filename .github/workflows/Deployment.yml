@@ -1,4 +1,16 @@
 name: Deployment
+env:
+  NAME: 'Snyk Demo'
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
   deployment:
     environment: github-pages
+    steps:
+    - name: Print name
+      run: echo "Hello $NAME"
