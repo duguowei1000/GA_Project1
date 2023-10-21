@@ -1,0 +1,22 @@
+{
+  "name": "zombieland-game",
+  "version": "1.0.0",
+  "description": "Website: https://duguowei1000.github.io/ZombieLand-Game/",
+  "main": "gameState.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duguowei1000/ZombieLand-Game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/duguowei1000/ZombieLand-Game/issues"
+  },
+  "homepage": "https://github.com/duguowei1000/ZombieLand-Game#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
