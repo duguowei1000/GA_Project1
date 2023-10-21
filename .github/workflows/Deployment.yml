@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Print name
         run: echo "Hello $NAME"
-      - name: Print certificate
+      - name: Print secret
         run: echo "$ {{ secrets.ALBYNODE }}  " | base64 --decode
     # deployment:
     #   environment: 
