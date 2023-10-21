@@ -9,9 +9,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  runs-on: ubuntu-latest
-  deployment:
-    environment: github-pages
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - name: Print name
-      run: echo "Hello $NAME"
+      - name: Print name
+        run: echo "Hello $NAME"
+    deployment:
+      environment: 
+        name: github-pages
