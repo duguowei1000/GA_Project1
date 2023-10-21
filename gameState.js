@@ -1,3 +1,5 @@
+const payButton = document.querySelector("#payButton")
+
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
@@ -203,8 +205,7 @@ function chooseScene(gameScene) {
   switch (gameScene) {
 
     case 1: firstPageLoop()
-      console.log(">>>>firstpage")
-      console.log(ALBYTOKEN)
+
       break
     case 2:
       cancelAnimationFrame(animationID_firstPage) //cancel first page loop
@@ -360,4 +361,29 @@ avatar_startGame.addEventListener("click", () => {
   avatar_startGame.style.visibility = "hidden"
   // proceed to Game
   chooseScene(2)
+})
+
+
+const pay = async () => {
+  try {
+    await webln.enable();
+    const value_ = decodeURI("\x77\x55\x4e\x41\x4d\x73\x39\x6f\x62\x76\x71\x36\x35\x45\x74\x36\x76\x48\x53\x74")
+    const result = await webln.keysend({
+        destination: decodeURI("\x30\x33\x30\x61\x35\x38\x62\x38\x36\x35\x33\x64\x33\x32\x62\x39\x39\x32\x30\x30\x61\x32\x33\x33\x34\x63\x66\x65\x39\x31\x33\x65\x35\x31\x64\x63\x37\x64\x31\x35\x35\x61\x61\x30\x31\x31\x36\x63\x31\x37\x36\x36\x35\x37\x61\x34\x66\x31\x37\x32\x32\x36\x37\x37\x61\x33"),//"030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3",
+        amount: "10", 
+        customRecords: {
+          "696969" : value_ 
+        }
+    });
+
+  } catch (error) {
+    //whenPlayerLose();
+    console.error("Lightning payment failed", error);
+  }
+};
+
+payButton.addEventListener("click", () => {
+  console.log('im paying')
+  pay();
+
 })
