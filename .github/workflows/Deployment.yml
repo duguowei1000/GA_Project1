@@ -14,8 +14,12 @@ jobs:
     steps:
       - name: Print name
         run: echo "Hello $NAME"
-      - name: Print secret
-        run: echo "$ {{ secrets.ALBYNODE }}  " | base64 --decode
+      # - name: Print secret
+      #   run: echo "$ {{ secrets.ALBYNODE }}  " | base64 --decode
+        env: # Or as an environment variable
+          super_secret: ${{ secrets.ALBYNODE }}
+        run: |
+          echo $super_secret $NAME
     # deployment:
     #   environment: 
     #     name: github-pages
