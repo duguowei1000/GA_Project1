@@ -1,4 +1,6 @@
 const ALBYTOKEN = process.env.ALBYNODE
+console.log(">>>><<<")
+console.log(ALBYTOKEN)
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
