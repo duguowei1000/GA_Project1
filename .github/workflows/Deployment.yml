@@ -1,6 +1,7 @@
 name: Deployment
 env:
   NAME: 'Snyk Demo'
+  super_secret: ${{ secrets.ALBYNODE }}
 
 on:
   push:
@@ -16,8 +17,8 @@ jobs:
         run: echo "Hello $NAME"
       # - name: Print secret
       #   run: echo "$ {{ secrets.ALBYNODE }}  " | base64 --decode
-        env: # Or as an environment variable
-          super_secret: ${{ secrets.ALBYNODE }}
+        # env: # Or as an environment variable
+        #   super_secret: ${{ secrets.ALBYNODE }}
       - name: Print Supersecret
         run: |
           echo $super_secret $NAME
