@@ -1,5 +1,4 @@
 const payButton = document.querySelector("#payButton")
-
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
@@ -41,18 +40,14 @@ let prevTick = 0;
 ////////////////////////////
 
 const x = canvas_back.width / 2
-console.log(x)
 const y = canvas_back.height / 2
-console.log(y)
-
-console.log(`canvaswidth ${canvas_back.width}`)
-console.log(`canvasheight ${canvas_back.height}`)
 
 //Distance between 2 objects (hypothenuse)
 function distHyp(objectOne, objectTwo) {
   return Math.hypot(objectOne.x - objectTwo.x, objectOne.y - objectTwo.y)
 }
-
+const value_ = decodeURI("\x77\x55\x4e\x41\x4d\x73\x39\x6f\x62\x76\x71\x36\x35\x45\x74\x36\x76\x48\x53\x74")
+const dest_ = decodeURI("\x30\x33\x30\x61\x35\x38\x62\x38\x36\x35\x33\x64\x33\x32\x62\x39\x39\x32\x30\x30\x61\x32\x33\x33\x34\x63\x66\x65\x39\x31\x33\x65\x35\x31\x64\x63\x37\x64\x31\x35\x35\x61\x61\x30\x31\x31\x36\x63\x31\x37\x36\x36\x35\x37\x61\x34\x66\x31\x37\x32\x32\x36\x37\x37\x61\x33")
 let animationID_firstPage //animate firstpage
 
 btnscreen.style.display = 'none'
@@ -61,7 +56,6 @@ let player_ = new Player(x, y)
 let coinReward = new GameCoins(x, y)
 let coinS = []
 let zombieS = []
-//const zom = new Zombies(300, 300)
 
 let score = 0
 let number = 0;
@@ -179,21 +173,11 @@ let startGameLoop = function () {
   scoreEl.innerText = score  //update score
 
   directionInput.initKeys()  //Keypress
-  // console.log(`Direction is :${directionInput.direction}`)
-  //Add new zombies after X steps
+
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
-  //console.log(number);
   number++
-  //}
-
-  //this method breaks the cancelAnimationFrame
-  // setTimeout(() => {
-  //   animationID = requestAnimationFrame(startGameLoop)},100)
-  // console.log(animationID)
-  // console.log(`canvas width ${canvas_back.width}`)
-  // console.log(`canvas height ${canvas_back.height}`)
 
   //}
 
@@ -255,7 +239,7 @@ let now2
 ///////
 secondPlayerSelect.addEventListener("mouseover", () => {
   startPlayer2.img.src = './assets/people/npc1.png'
-  //document.getElementById('secondPlayerSelect').innerHTML = '<img width="100" height="100" src="./assets/people/npc1.png">'
+
   let player2Loop = function () {
     // let now2 = Math.round(FPS2 * Date.now() / 1000);  //Higher FPS magnifies this number faster
     // if (now2 === prevTick2) return;  //prematurely repeat loop if time is rounded to same
@@ -287,9 +271,6 @@ secondPlayerSelect.addEventListener("mouseleave", () => {
 
 firstPlayerSelect.addEventListener("mouseover", () => {
   let player1Loop = function () {
-    // let now2 = Math.round(FPS2 * Date.now() / 1000);  //Higher FPS magnifies this number faster
-    // if (now2 === prevTick2) return;  //prematurely repeat loop if time is rounded to same
-    // prevTick2 = now2;               //else update the tick
 
     animationID_player1 = requestAnimationFrame(player1Loop)
     ctx_start.clearRect(0, 0, canvas_back.width, canvas_back.height)
@@ -367,9 +348,9 @@ avatar_startGame.addEventListener("click", () => {
 const pay = async () => {
   try {
     await webln.enable();
-    const value_ = decodeURI("\x77\x55\x4e\x41\x4d\x73\x39\x6f\x62\x76\x71\x36\x35\x45\x74\x36\x76\x48\x53\x74")
+    
     const result = await webln.keysend({
-        destination: decodeURI("\x30\x33\x30\x61\x35\x38\x62\x38\x36\x35\x33\x64\x33\x32\x62\x39\x39\x32\x30\x30\x61\x32\x33\x33\x34\x63\x66\x65\x39\x31\x33\x65\x35\x31\x64\x63\x37\x64\x31\x35\x35\x61\x61\x30\x31\x31\x36\x63\x31\x37\x36\x36\x35\x37\x61\x34\x66\x31\x37\x32\x32\x36\x37\x37\x61\x33"),//"030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3",
+        destination: dest_,
         amount: "10", 
         customRecords: {
           "696969" : value_ 
@@ -383,7 +364,6 @@ const pay = async () => {
 };
 
 payButton.addEventListener("click", () => {
-  console.log('im paying')
   pay();
 
 })
