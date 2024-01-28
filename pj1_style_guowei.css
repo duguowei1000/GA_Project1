@@ -114,6 +114,10 @@ p2{
 	position: absolute;
 }
 
+@media only screen and (max-width: 600px) {
+	#canvas_back {background-color:  red;}
+  }
+
 /* playselection */
 #canvas_start{
 	margin-top: 20px;

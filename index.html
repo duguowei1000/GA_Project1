@@ -11,12 +11,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="http://calebevans.me/projects/jcanvas/resources/jcanvas/jcanvas.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@latest/dist/index.browser.js"></script>
+    <!-- <script src="https://unpkg.com/konva@9/konva.min.js"></script> -->
+
   </head>
 
   <body>
-    
+
     <div class="base">
-    
       <canvas id="canvas_back"></canvas>
       <div class="fixed">
         <div id="counter"><span>Score :</span><span id="scoreEL">0</span></div>
@@ -27,6 +28,10 @@
         <div class="title2">Land</div>
 
         <canvas id="canvas_start"></canvas>
+        <div class="fixed arrows">
+          <button class="playerButton" id="upArrowSelect">Up Arrow</button>
+          <button class="playerButton" id="downArrowSelect">Down Arrow</button>
+        </div>
         <div class="fixed avatar_button">
           <p>Choose your Player</p>
           <div>
@@ -57,9 +62,10 @@
         </div>
       </div>
     </div>
-
     <script src="keyPressDirectionInput.js"></script>
     <script src="Objects.js"></script>
     <script src="gameState.js"></script>
+    <!-- <script src="hitregion.js"></script> -->
   </body>
+
 </html>
