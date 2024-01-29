@@ -4,9 +4,6 @@ const ctx_back = canvas_back.getContext('2d')
 const canvas_start = document.getElementById('canvas_start');
 const ctx_start = canvas_start.getContext('2d')
 
-// const canvas = document.getElementById('canvas_back');
-// const ctx = canvas.getContext('2d');
-
 const hitCanvas = document.createElement('canvas');
 const hitCtx = hitCanvas.getContext('2d');
 
@@ -101,7 +98,7 @@ let player2EventTriggered = false
 
 
 let firstPageLoop = function () {
-
+//
   //DOM
   counter.style.display = 'none'
   avatar_screen.style.display = 'flex'
@@ -115,64 +112,7 @@ let firstPageLoop = function () {
   if (!player2EventTriggered) {
     ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
   }
-  ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
-
-  const colorsHash = {};
-
-  function getRandomColor() {
-   const r = Math.round(Math.random() * 255);
-   const g = Math.round(Math.random() * 255);
-   const b = Math.round(Math.random() * 255);
-   return `rgb(${r},${g},${b})`;
-  }
-  
-  
-  
-  const circles = [{
-    id: '1', x: 40, y: 100, radius: 10, color: 'rgb(255,0,0)'
-  }, {
-    id: '2', x: 100, y: 140, radius: 10, color: 'rgb(0,255,0)'
-  }];
-  
-  circles.forEach(circle => {
-    while(true) {
-       const colorKey = getRandomColor();
-       if (!colorsHash[colorKey]) {
-          circle.colorKey = colorKey;
-          colorsHash[colorKey] = circle;
-          return;
-       }
-    }
-  });
-  
-  circles.forEach(circle => {
-    ctx_start.beginPath();
-    ctx_start.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    ctx_start.fillStyle = circle.color;
-    ctx_start.fill();
-    
-    hitCtx.beginPath();
-    hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    hitCtx.fillStyle = circle.colorKey;
-    hitCtx.fill();
-  });
-  
-  function hasSameColor(color, shape) {
-    return shape.color === color;
-  }
-  
-  canvas.addEventListener('click', (e) => {
-    const mousePos = {
-      x: e.clientX - canvas.offsetLeft,
-      y: e.clientY - canvas.offsetTop
-    };
-    const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
-    const shape = colorsHash[color];
-    if (shape) {
-       alert('click on circle: ' + shape.id);
-    }
-   });
+  // ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
 
 }
 
@@ -201,8 +141,9 @@ let startGameLoop = function () {
 
   //Draw background  
   // ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
-  ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
+  // ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
 
+  
   //Draw Objects
 
   player_.update(directionInput.direction)
@@ -245,6 +186,62 @@ let startGameLoop = function () {
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
+  //hit
+  const colorsHash = {};
+
+  function getRandomColor() {
+   const r = Math.round(Math.random() * 255);
+   const g = Math.round(Math.random() * 255);
+   const b = Math.round(Math.random() * 255);
+   return `rgb(${r},${g},${b})`;
+  }
+  
+  const circles = [{
+    id: '1', x: x, y: y, radius: 50, color: 'rgb(255,0,0)'
+  }, {
+    id: '2', x: x, y: y+30, radius: 50, color: 'rgb(0,255,0)'
+  }];
+  
+  circles.forEach(circle => {
+    while(true) {
+       const colorKey = getRandomColor();
+       if (!colorsHash[colorKey]) {
+          circle.colorKey = colorKey;
+          colorsHash[colorKey] = circle;
+          return;
+       }
+    }
+  });
+  
+  circles.forEach(circle => {
+    ctx_back.beginPath();
+    ctx_back.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+    ctx_back.fillStyle = circle.color;
+    ctx_back.fill();
+    
+    hitCtx.beginPath();
+    hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+    hitCtx.fillStyle = circle.colorKey;
+    hitCtx.fill();
+  });
+  
+  // function hasSameColor(color, shape) {
+  //   return shape.color === color;
+  // }
+  
+  canvas_back.addEventListener('click', (e) => {
+    const mousePos = {
+      x: e.clientX - canvas_back.offsetLeft,
+      y: e.clientY - canvas_back.offsetTop
+    };
+    const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+    const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
+    const shape = colorsHash[color];
+    if (shape) {
+       alert('click on circle: ' + shape.id);
+    }
+   });
+  //hit
   //console.log(number);
   number++
   //}
@@ -291,6 +288,7 @@ startGamebtn.addEventListener("click", () => {
 backFirstpgbtn.addEventListener("click", () => {
   init()
   btnscreen.style.display = "none"
+  ctx_back.clearRect(0, 0, canvas_back.width, canvas_back.height)
   chooseScene(1)  //back to home page
 })
 

@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas_back');
-const ctx = canvas.getContext('2d');
+const canvas_back = document.getElementById('canvas_back');
+const ctx = canvas_back.getContext('2d');
 
 const hitCanvas = document.createElement('canvas');
 const hitCtx = hitCanvas.getContext('2d');
@@ -44,14 +44,14 @@ circles.forEach(circle => {
   hitCtx.fill();
 });
 
-function hasSameColor(color, shape) {
-  return shape.color === color;
-}
+// function hasSameColor(color, shape) {
+//   return shape.color === color;
+// }
 
-canvas.addEventListener('click', (e) => {
+canvas_back.addEventListener('click', (e) => {
   const mousePos = {
-    x: e.clientX - canvas.offsetLeft,
-    y: e.clientY - canvas.offsetTop
+    x: e.clientX - canvas_back.offsetLeft,
+    y: e.clientY - canvas_back.offsetTop
   };
   const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
   const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
