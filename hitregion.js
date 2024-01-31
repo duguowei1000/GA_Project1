@@ -52,7 +52,17 @@ canvas_back.addEventListener('click', (e) => {
   const mousePos = {
     x: e.clientX - canvas_back.offsetLeft,
     y: e.clientY - canvas_back.offsetTop
+
   };
+  let x = e.clientX - canvas_back.offsetLeft
+  let y = e.clientY - canvas_back.offsetTop
+
+  ctx.fillStyle ='red'
+  ctx.beginPath()
+  ctx.arc(x,y,5,0,Math.PI*2)
+  ctx.fill()
+  ctx.stroke()
+
   const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
   const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
   const shape = colorsHash[color];

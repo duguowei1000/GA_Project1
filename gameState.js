@@ -9,6 +9,8 @@ const hitCtx = hitCanvas.getContext('2d');
 
 canvas_back.height = window.innerHeight
 canvas_back.width = window.innerWidth
+hitCtx.height = window.innerHeight
+hitCtx.width = window.innerWidth
 
 const startImg = new Image();
 startImg.src = "./assets/halloweenwallpaper.png";
@@ -197,9 +199,9 @@ let startGameLoop = function () {
   }
   
   const circles = [{
-    id: '1', x: x, y: y, radius: 50, color: 'rgb(255,0,0)'
+    id: '1', x: x, y: y-200, radius: 50, color: 'rgb(255,0,0)'
   }, {
-    id: '2', x: x, y: y+30, radius: 50, color: 'rgb(0,255,0)'
+    id: '2', x: x, y: y-100, radius: 50, color: 'rgb(0,255,0)'
   }];
   
   circles.forEach(circle => {
@@ -221,7 +223,7 @@ let startGameLoop = function () {
     
     hitCtx.beginPath();
     hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    hitCtx.fillStyle = circle.colorKey;
+    hitCtx.fillStyle = circle.colorKey; 
     hitCtx.fill();
   });
   
@@ -233,12 +235,23 @@ let startGameLoop = function () {
     const mousePos = {
       x: e.clientX - canvas_back.offsetLeft,
       y: e.clientY - canvas_back.offsetTop
+  
     };
+    let x = e.clientX - canvas_back.offsetLeft
+    let y = e.clientY - canvas_back.offsetTop
+  
+    ctx_back.fillStyle ='red'
+    ctx_back.beginPath()
+    ctx_back.arc(x,y,5,0,Math.PI*2)
+    ctx_back.fill()
+    ctx_back.stroke()
+    
     const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
     const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
     const shape = colorsHash[color];
     if (shape) {
-       alert('click on circle: ' + shape.id);
+      console.log('clicked!!!')
+      //  alert('click on circle: ' + shape.id);
     }
    });
   //hit
