@@ -15,7 +15,7 @@ class DirectionInput {
     }
   
     get direction() {
-      console.log(this.heldDirections[0])
+      // console.log(this.heldDirections[0])
       return this.heldDirections[0]
     }
     initKeys() {

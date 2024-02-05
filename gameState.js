@@ -153,8 +153,8 @@ let startGameLoop = function () {
   //player_.updatePosition(directionInput.direction)
   coinReward.update()
 
-  console.log(player_.x)
-  console.log(player_.y)
+  // console.log(player_.x)
+  // console.log(player_.y)
 
   zombieS.forEach((zom) => {
     zom.update()
@@ -231,28 +231,28 @@ let startGameLoop = function () {
   //   return shape.color === color;
   // }
   
-  canvas_back.addEventListener('click', (e) => {
-    const mousePos = {
-      x: e.clientX - canvas_back.offsetLeft,
-      y: e.clientY - canvas_back.offsetTop
-  
-    };
-    let x = e.clientX - canvas_back.offsetLeft
-    let y = e.clientY - canvas_back.offsetTop
-  
+  canvas_back.addEventListener('click', (event) => {
+   
+    let x = event.clientX //- canvas_back.offsetLeft 
+    let y = event.clientY + canvas_back.offsetTop*5
+    // console.log("x",x,"y",y)
+    console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
+    console.log(`canvaswidth ${canvas_back.width}`)
+    console.log(`canvasheight ${canvas_back.height}`)
+
     ctx_back.fillStyle ='red'
     ctx_back.beginPath()
     ctx_back.arc(x,y,5,0,Math.PI*2)
     ctx_back.fill()
     ctx_back.stroke()
     
-    const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
-    const shape = colorsHash[color];
-    if (shape) {
-      console.log('clicked!!!')
-      //  alert('click on circle: ' + shape.id);
-    }
+    // const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+    // const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
+    // const shape = colorsHash[color];
+    // if (shape) {
+    //   console.log('clicked!!!')
+    //   //  alert('click on circle: ' + shape.id);
+    // }
    });
   //hit
   //console.log(number);
