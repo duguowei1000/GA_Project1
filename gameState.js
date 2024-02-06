@@ -230,7 +230,13 @@ let startGameLoop = function () {
   // function hasSameColor(color, shape) {
   //   return shape.color === color;
   // }
-  
+  // const eventdown = new KeyboardEvent('keydown', {
+  //   key: 'ArrowDown',
+  //   code: 'ArrowDown',
+  //   which: 40,
+  //   keyCode: 40,
+  // });                                                                        
+
   canvas_back.addEventListener('click', (event) => {
    
     let x = event.clientX //- canvas_back.offsetLeft 
@@ -239,6 +245,11 @@ let startGameLoop = function () {
     console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
     console.log(`canvaswidth ${canvas_back.width}`)
     console.log(`canvasheight ${canvas_back.height}`)
+
+
+   //simulate keypress
+    const keyPressEvent = new KeyboardEvent('keypress', { keyCode: 40 });
+    canvas_start.dispatchEvent(keyPressEvent);
 
     ctx_back.fillStyle ='red'
     ctx_back.beginPath()
