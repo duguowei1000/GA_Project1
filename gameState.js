@@ -235,7 +235,16 @@ let startGameLoop = function () {
   //   code: 'ArrowDown',
   //   which: 40,
   //   keyCode: 40,
-  // });                                                                        
+  // });         
+     
+  // canvas_back.addEventListener('click', () => {
+  //   simulateKeyPress('ArrowUp');
+  // });
+  
+  function simulateKeyPress(key) {
+    const event = new KeyboardEvent('keydown', { key });
+    document.dispatchEvent(event);//text
+  }                                                     
 
   canvas_back.addEventListener('click', (event) => {
    
@@ -248,8 +257,7 @@ let startGameLoop = function () {
 
 
    //simulate keypress
-    const keyPressEvent = new KeyboardEvent('keypress', { keyCode: 40 });
-    canvas_start.dispatchEvent(keyPressEvent);
+    simulateKeyPress('ArrowUp');
 
     ctx_back.fillStyle ='red'
     ctx_back.beginPath()
