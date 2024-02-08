@@ -1,3 +1,52 @@
+//create a keypress Class for game Objects
+class DirectionInput {
+  constructor() {
+    this.heldDirections = [];
+    this.map = {
+      "ArrowUp": "up",
+      "KeyW": "up",
+      "ArrowDown": "down",
+      "KeyS": "down",
+      "ArrowLeft": "left",
+      "KeyA": "left",
+      "ArrowRight": "right",
+      "KeyD": "right",
+    }
+  }
+
+  get direction() {
+    // console.log(this.heldDirections[0])
+    return this.heldDirections[0]
+  }
+
+
+  initKeys() {
+    // function simulateKeyPress(key) {
+    //   const event = new KeyboardEvent('keydown', { key });
+    //   document.dispatchEvent(event);//text
+    // }     
+    // simulateKeyPress('ArrowUp');
+    document.addEventListener("keydown", e => {
+      //console.log(e.code);
+      const dir = this.map[e.code]
+
+      if (dir && this.heldDirections.indexOf(dir) === -1) {
+        this.heldDirections.unshift(dir);
+        console.log(this.heldDirections)
+      }
+    });
+    document.addEventListener("keyup", e => {
+      const dir = this.map[e.code];
+      const index = this.heldDirections.indexOf(dir);
+      if (index > -1) {
+        this.heldDirections.splice(index, 1);
+        console.log(this.heldDirections)
+      }
+    })
+
+  }
+}
+
 const canvas_back = document.getElementById('canvas_back');
 const ctx_back = canvas_back.getContext('2d')
 
@@ -185,6 +234,7 @@ let startGameLoop = function () {
   directionInput.initKeys()  //Keypress
   // console.log(`Direction is :${directionInput.direction}`)
   //Add new zombies after X steps
+
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
@@ -241,10 +291,10 @@ let startGameLoop = function () {
   //   simulateKeyPress('ArrowUp');
   // });
   
-  function simulateKeyPress(key) {
-    const event = new KeyboardEvent('keydown', { key });
-    document.dispatchEvent(event);//text
-  }                                                     
+  // function simulateKeyPress(key) {
+  //   const event = new KeyboardEvent('keydown', { key });
+  //   document.dispatchEvent(event);//text
+  // }                                                     
 
   canvas_back.addEventListener('click', (event) => {
    
@@ -256,8 +306,8 @@ let startGameLoop = function () {
     console.log(`canvasheight ${canvas_back.height}`)
 
 
-   //simulate keypress
-    simulateKeyPress('ArrowUp');
+  //  //simulate keypress
+  //   simulateKeyPress('ArrowUp');
 
     ctx_back.fillStyle ='red'
     ctx_back.beginPath()
@@ -452,3 +502,5 @@ avatar_startGame.addEventListener("click", () => {
   // proceed to Game
   chooseScene(2)
 })
+
+
