@@ -34,18 +34,23 @@ class DirectionInput {
       // if (touch){
 
       // }
-      document.addEventListener('click', (e) => {
+      document.addEventListener('mousedown', (e) => {
 
-        const mousePos = {
-          x: e.clientX - canvas_back.offsetLeft,
-          y: e.clientY - canvas_back.offsetTop
+        // const mousePos = {
+        //   x: e.clientX - canvas_back.offsetLeft,
+        //   y: e.clientY - canvas_back.offsetTop
       
-        };
+        // };
         let x = e.clientX - canvas_back.offsetLeft
         let y = e.clientY - canvas_back.offsetTop
         
+        console.log( 'canvas_back.height',canvas_back.height)
+        console.log( 'canvas_back.width',canvas_back.width)
+
+        
+        console.log("midXaxis",midXaxis)
         console.log("x",x,"y",y)
-        if(x<200){
+        if(x<midXaxis){
           const dir = 'left'
           console.log('here',dir)
           if (dir && this.heldDirections.indexOf(dir) === -1) {
@@ -53,7 +58,7 @@ class DirectionInput {
             // console.log(this.heldDirections)
           }
         }
-        if(x>200){
+        if(x>midXaxis){
           const dir = 'right'
           console.log('here',dir)
           if (dir && this.heldDirections.indexOf(dir) === -1) {
@@ -63,6 +68,9 @@ class DirectionInput {
         }
 
 
+      });
+      document.addEventListener('mouseup', (e) => {
+        this.heldDirections= []
       });
 
 

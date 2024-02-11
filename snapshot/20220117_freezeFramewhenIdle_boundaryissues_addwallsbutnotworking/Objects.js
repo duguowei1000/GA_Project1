@@ -97,12 +97,8 @@ class Player {
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
     } else if (this.x > (rightEdge)) { //player beyond right edge
-      console.log(this.x)
       this.x = rightEdge - 10
       const [axisProperty, changePixel, face] = this.directionUpdate_X_axis_RightEdge[inputKeys || "idle"] // [key] : value pair //undefined if no or condition
-      console.log(`inputkeys: ${inputKeys}`)
-      console.log(`>>>rightEdge: ${this.directionUpdate_X_axis_RightEdge}`)
-      console.log(`>>>>>>axisprop${axisProperty} >>>> changepixel${changePixel} >>>> face ${face}`)
       this[axisProperty] += changePixel //this.x += changePixel
       this.faceAnimation = face
     }else if (this.y < topEdge ) { //player beyond right edge

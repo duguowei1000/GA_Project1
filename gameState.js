@@ -9,6 +9,9 @@ const hitCtx = hitCanvas.getContext('2d');
 
 canvas_back.height = window.innerHeight
 canvas_back.width = window.innerWidth
+let midYaxis = canvas_back.height/2
+let midXaxis = canvas_back.width/2  
+
 hitCtx.height = window.innerHeight
 hitCtx.width = window.innerWidth
 
@@ -47,12 +50,10 @@ let prevTick = 0;
 ////////////////////////////
 
 const x = canvas_back.width / 2
-console.log(x)
 const y = canvas_back.height / 2
-console.log(y)
 
-console.log(`canvaswidth ${canvas_back.width}`)
-console.log(`canvasheight ${canvas_back.height}`)
+// console.log(`canvaswidth ${canvas_back.width}`)
+// console.log(`canvasheight ${canvas_back.height}`)
 
 //Distance between 2 objects (hypothenuse)
 function distHyp(objectOne, objectTwo) {
@@ -205,9 +206,14 @@ let startGameLoop = function () {
   }
   
   const circles = [{
-    id: '1', x: x, y: y-200, radius: 50, color: 'rgb(255,0,0)'
+    id: '1', x: midXaxis, y: midYaxis+100, radius: 50, color: 'rgb(255,0,0)'
   }, {
-    id: '2', x: x, y: y-100, radius: 50, color: 'rgb(0,255,0)'
+    id: '2', x: midXaxis, y: midYaxis-100, radius: 50, color: 'rgb(0,255,0)'
+  },
+  {
+    id: '3', x: midXaxis+100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
+  },{
+    id: '4', x: midXaxis-100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
   }];
   
   circles.forEach(circle => {
@@ -227,10 +233,10 @@ let startGameLoop = function () {
     ctx_back.fillStyle = circle.color;
     ctx_back.fill();
     
-    hitCtx.beginPath();
-    hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    hitCtx.fillStyle = circle.colorKey; 
-    hitCtx.fill();
+    // hitCtx.beginPath();
+    // hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+    // hitCtx.fillStyle = circle.colorKey; 
+    // hitCtx.fill();
   });
   
   // function hasSameColor(color, shape) {
@@ -257,9 +263,9 @@ let startGameLoop = function () {
     let x = event.clientX //- canvas_back.offsetLeft 
     let y = event.clientY + canvas_back.offsetTop*5
     // console.log("x",x,"y",y)
-    console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
-    console.log(`canvaswidth ${canvas_back.width}`)
-    console.log(`canvasheight ${canvas_back.height}`)
+    // console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
+    // console.log(`canvaswidth ${canvas_back.width}`)
+    // console.log(`canvasheight ${canvas_back.height}`)
 
 
   //  //simulate keypress
@@ -438,7 +444,6 @@ secondPlayerSelect.addEventListener("click", () => {
     secondPlayerSelect.style.border = "3px solid #FBED64"
     firstPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility = "visible"
-    console.log(">>>ToggleTrue")
   } else {
     secondPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility = "hidden"
