@@ -1,9 +1,4 @@
 //create a keypress Class for game Objects
-function simulateKeyPress(key) {
-  const event = new KeyboardEvent('keydown', { key });
-  document.dispatchEvent(event);//text
-  console.log('simulating')
-} 
 
 class DirectionInput {
     constructor() {
@@ -41,31 +36,54 @@ class DirectionInput {
         //   y: e.clientY - canvas_back.offsetTop
       
         // };
-        let x = e.clientX - canvas_back.offsetLeft
-        let y = e.clientY - canvas_back.offsetTop
+        let x = e.pageX//clientX - canvas_back.offsetLeft
+        let y = e.pageY- canvas_back.offsetTop//clientY - canvas_back.offsetTop
         
-        console.log( 'canvas_back.height',canvas_back.height)
-        console.log( 'canvas_back.width',canvas_back.width)
+        // console.log( 'canvas_back.height',canvas_back.height)
+        // console.log( 'canvas_back.width',canvas_back.width)
 
         
-        console.log("midXaxis",midXaxis)
-        console.log("x",x,"y",y)
-        if(x<midXaxis){
-          const dir = 'left'
-          console.log('here',dir)
-          if (dir && this.heldDirections.indexOf(dir) === -1) {
-            this.heldDirections.unshift(dir);
-            // console.log(this.heldDirections)
+        // console.log("midXaxis",midXaxis)
+        // console.log("midYaxis",midYaxis)
+        // console.log("x",x,"y",y)
+        
+        if( y >(midYaxis -50) && y < (midYaxis+50)){
+          if(x<midXaxis){
+            const dir = 'left'
+            console.log('here',dir)
+            if (dir && this.heldDirections.indexOf(dir) === -1) {
+              this.heldDirections.unshift(dir);
+              // console.log(this.heldDirections)
+            }
+          }else if(x>midXaxis){
+            const dir = 'right'
+            console.log('here',dir)
+            if (dir && this.heldDirections.indexOf(dir) === -1) {
+              this.heldDirections.unshift(dir);
+              // console.log(this.heldDirections)
+            }
           }
+
         }
-        if(x>midXaxis){
-          const dir = 'right'
-          console.log('here',dir)
-          if (dir && this.heldDirections.indexOf(dir) === -1) {
-            this.heldDirections.unshift(dir);
-            // console.log(this.heldDirections)
+        if( x >(midXaxis -50) && x < (midXaxis+50)){
+          if(y<midYaxis){
+            const dir = 'up'
+            console.log('here',dir)
+            if (dir && this.heldDirections.indexOf(dir) === -1) {
+              this.heldDirections.unshift(dir);
+              // console.log(this.heldDirections)
+            }
+          }else if(y>midYaxis){
+            const dir = 'down'
+            console.log('here',dir)
+            if (dir && this.heldDirections.indexOf(dir) === -1) {
+              this.heldDirections.unshift(dir);
+              // console.log(this.heldDirections)
+            }
           }
+
         }
+
 
 
       });

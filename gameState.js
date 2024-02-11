@@ -115,7 +115,7 @@ let firstPageLoop = function () {
   if (!player2EventTriggered) {
     ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
   }
-  // ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
+  ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
 
 }
 
@@ -144,18 +144,25 @@ let startGameLoop = function () {
 
   //Draw background  
   // ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
-  // ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
-
+  ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
+  ctx_back.drawImage(leftarrw,100,100,100,100)
   
   //Draw Objects
 
   player_.update(directionInput.direction)
-  //player_.draw()
-  //player_.updatePosition(directionInput.direction)
-  coinReward.update()
 
-  // console.log(player_.x)
-  // console.log(player_.y)
+  coinReward.update()
+  // const drawTriangle = ()=>{
+  //   let height = 200 * Math.cos(Math.PI / 6);
+
+  //   canvas_back.beginPath();
+  //   canvas_back.moveTo(200, 600);
+  //   canvas_back.lineTo(300, 600);
+  //   canvas_back.lineTo(200, 600 - height);
+  //   canvas_back.closePath();
+
+  // } 
+  // drawTriangle()
 
   zombieS.forEach((zom) => {
     zom.update()
@@ -167,27 +174,20 @@ let startGameLoop = function () {
       btnscreen.style.display = 'flex'
       bigscoreEl.innerText = score       //Update End score
     }
-    //zom.draw() //draw black circle
-    //zom.drawImg() 
   })
 
   //Coin reward
   const distCoinPlayer = distHyp(player_, coinReward)
-  // console.log(distCoinPlayer)
   if (distCoinPlayer - coinReward.radius - player_.radius < 20) {
-    // console.log('coinTaken')
-    // console.log(coinS)
     coinReward.coinTaken()
     score += 100
 
   }
   scoreEl.innerText = score  //update score
+  
 
-    
-  // directionInput.keypress()
+
   directionInput.initKeys()  //Keypress
-
-
 
   // console.log(`Direction is :${directionInput.direction}`)
   //Add new zombies after X steps
@@ -196,48 +196,50 @@ let startGameLoop = function () {
     zombieS.push(new Zombies(x, y))
   }
   //hit
-  const colorsHash = {};
 
-  function getRandomColor() {
-   const r = Math.round(Math.random() * 255);
-   const g = Math.round(Math.random() * 255);
-   const b = Math.round(Math.random() * 255);
-   return `rgb(${r},${g},${b})`;
-  }
+
+  // const colorsHash = {};
+
+  // function getRandomColor() {
+  //  const r = Math.round(Math.random() * 255);
+  //  const g = Math.round(Math.random() * 255);
+  //  const b = Math.round(Math.random() * 255);
+  //  return `rgb(${r},${g},${b})`;
+  // }
   
-  const circles = [{
-    id: '1', x: midXaxis, y: midYaxis+100, radius: 50, color: 'rgb(255,0,0)'
-  }, {
-    id: '2', x: midXaxis, y: midYaxis-100, radius: 50, color: 'rgb(0,255,0)'
-  },
-  {
-    id: '3', x: midXaxis+100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
-  },{
-    id: '4', x: midXaxis-100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
-  }];
+  // const circles = [{
+  //   id: '1', x: midXaxis, y: midYaxis+100, radius: 50, color: 'rgb(255,0,0)'
+  // }, {
+  //   id: '2', x: midXaxis, y: midYaxis-100, radius: 50, color: 'rgb(0,255,0)'
+  // },
+  // {
+  //   id: '3', x: midXaxis+100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
+  // },{
+  //   id: '4', x: midXaxis-100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
+  // }];
   
-  circles.forEach(circle => {
-    while(true) {
-       const colorKey = getRandomColor();
-       if (!colorsHash[colorKey]) {
-          circle.colorKey = colorKey;
-          colorsHash[colorKey] = circle;
-          return;
-       }
-    }
-  });
+  // circles.forEach(circle => {
+  //   while(true) {
+  //      const colorKey = getRandomColor();
+  //      if (!colorsHash[colorKey]) {
+  //         circle.colorKey = colorKey;
+  //         colorsHash[colorKey] = circle;
+  //         return;
+  //      }
+  //   }
+  // });
   
-  circles.forEach(circle => {
-    ctx_back.beginPath();
-    ctx_back.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    ctx_back.fillStyle = circle.color;
-    ctx_back.fill();
+  // circles.forEach(circle => {
+  //   ctx_back.beginPath();
+  //   ctx_back.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+  //   ctx_back.fillStyle = circle.color;
+  //   ctx_back.fill();
     
     // hitCtx.beginPath();
     // hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
     // hitCtx.fillStyle = circle.colorKey; 
     // hitCtx.fill();
-  });
+  // });
   
   // function hasSameColor(color, shape) {
   //   return shape.color === color;
@@ -256,7 +258,13 @@ let startGameLoop = function () {
   // function simulateKeyPress(key) {
   //   const event = new KeyboardEvent('keydown', { key });
   //   document.dispatchEvent(event);//text
-  // }                                                     
+  // }
+  // canvas_back.beginPath();
+  // canvas_back.moveTo(100, 100);
+  // canvas_back.lineTo(100, 300);
+  // canvas_back.lineTo(300, 300);
+  // canvas_back.closePath();
+
 
   canvas_back.addEventListener('click', (event) => {
    
@@ -277,6 +285,8 @@ let startGameLoop = function () {
     ctx_back.fill()
     ctx_back.stroke()
     
+
+
     // const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
     // const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
     // const shape = colorsHash[color];
