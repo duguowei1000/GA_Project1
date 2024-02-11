@@ -145,7 +145,6 @@ let startGameLoop = function () {
   //Draw background  
   // ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
   ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
-  ctx_back.drawImage(leftarrw,100,100,100,100)
   
   //Draw Objects
 
