@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
     <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
     <link rel="stylesheet" href="pj1_style_guowei.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="http://calebevans.me/projects/jcanvas/resources/jcanvas/jcanvas.js"></script> -->
@@ -24,24 +24,24 @@
         <div id="counter"><span>Score :</span><span id="scoreEL">0</span></div>
       </div>
       <div class="fixed arrows prevent-select">
-        <div id="advisory" unselectable="on"><span>You can navigate using keyboard(preferred) or touch the arrows</span></div>
+        <div id="advisory" unselectable="on"><span>Navigate using keyboard(Desktop) or touch the arrows (Mobile)</span></div>
       </div>
-      <div class="fixed arrows">
+      <div class="fixed arrows prevent-select">
         <div id="Leftarrows">
           <img src = "./assets/arrows/lefta.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
         </div>
       </div>
-      <div class="fixed arrows">
+      <div class="fixed arrows prevent-select">
         <div id="Rightarrows">
           <img src = "./assets/arrows/righta.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
         </div>
       </div>
-      <div class="fixed arrows">
+      <div class="fixed arrows prevent-select">
         <div id="Toparrows">
           <img src = "./assets/arrows/upa.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
         </div>
       </div>
-      <div class="fixed arrows">
+      <div class="fixed arrows prevent-select">
         <div id="Btmarrows">
           <img src = "./assets/arrows/downa.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
         </div>
@@ -52,10 +52,6 @@
         <div class="title2">Land</div>
 
         <canvas id="canvas_start"></canvas>
-        <!-- <div class="fixed arrows">
-          <button class="playerButton" id="upArrowSelect">Up Arrow</button>
-          <button class="playerButton" id="downArrowSelect">Down Arrow</button>
-        </div> -->
         <div class="fixed avatar_button">
           <p>Choose your Player</p>
           <div>
