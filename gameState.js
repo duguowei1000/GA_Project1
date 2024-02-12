@@ -30,6 +30,11 @@ imgZombie.src = "./assets/zombies.png";
 const directionInput = new DirectionInput();
 
 const counter = document.querySelector('#counter')
+const advisory = document.querySelector('#advisory')
+const Leftarrows = document.querySelector('#Leftarrows')
+const Rightarrows = document.querySelector('#Rightarrows')
+const Toparrows = document.querySelector('#Toparrows')
+const Btmarrows = document.querySelector('#Btmarrows')
 const scoreEl = document.querySelector('#scoreEL')
 const startGamebtn = document.querySelector('#startGameBtn')
 const backFirstpgbtn = document.querySelector('#backFirstpgbtn')
@@ -103,6 +108,11 @@ let player2EventTriggered = false
 let firstPageLoop = function () {
 //
   //DOM
+  Leftarrows.style.display = 'none'
+  Rightarrows.style.display = 'none'
+  Toparrows.style.display = 'none'
+  Btmarrows.style.display = 'none'
+  advisory.style.display = 'none'
   counter.style.display = 'none'
   avatar_screen.style.display = 'flex'
 
@@ -183,9 +193,6 @@ let startGameLoop = function () {
 
   }
   scoreEl.innerText = score  //update score
-  
-
-
   directionInput.initKeys()  //Keypress
 
   // console.log(`Direction is :${directionInput.direction}`)
@@ -194,76 +201,6 @@ let startGameLoop = function () {
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
-  //hit
-
-
-  // const colorsHash = {};
-
-  // function getRandomColor() {
-  //  const r = Math.round(Math.random() * 255);
-  //  const g = Math.round(Math.random() * 255);
-  //  const b = Math.round(Math.random() * 255);
-  //  return `rgb(${r},${g},${b})`;
-  // }
-  
-  // const circles = [{
-  //   id: '1', x: midXaxis, y: midYaxis+100, radius: 50, color: 'rgb(255,0,0)'
-  // }, {
-  //   id: '2', x: midXaxis, y: midYaxis-100, radius: 50, color: 'rgb(0,255,0)'
-  // },
-  // {
-  //   id: '3', x: midXaxis+100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
-  // },{
-  //   id: '4', x: midXaxis-100, y: midYaxis, radius: 50, color: 'rgb(0,255,0)'
-  // }];
-  
-  // circles.forEach(circle => {
-  //   while(true) {
-  //      const colorKey = getRandomColor();
-  //      if (!colorsHash[colorKey]) {
-  //         circle.colorKey = colorKey;
-  //         colorsHash[colorKey] = circle;
-  //         return;
-  //      }
-  //   }
-  // });
-  
-  // circles.forEach(circle => {
-  //   ctx_back.beginPath();
-  //   ctx_back.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-  //   ctx_back.fillStyle = circle.color;
-  //   ctx_back.fill();
-    
-    // hitCtx.beginPath();
-    // hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    // hitCtx.fillStyle = circle.colorKey; 
-    // hitCtx.fill();
-  // });
-  
-  // function hasSameColor(color, shape) {
-  //   return shape.color === color;
-  // }
-  // const eventdown = new KeyboardEvent('keydown', {
-  //   key: 'ArrowDown',
-  //   code: 'ArrowDown',
-  //   which: 40,
-  //   keyCode: 40,
-  // });         
-     
-  // canvas_back.addEventListener('click', () => {
-  //   simulateKeyPress('ArrowUp');
-  // });
-  
-  // function simulateKeyPress(key) {
-  //   const event = new KeyboardEvent('keydown', { key });
-  //   document.dispatchEvent(event);//text
-  // }
-  // canvas_back.beginPath();
-  // canvas_back.moveTo(100, 100);
-  // canvas_back.lineTo(100, 300);
-  // canvas_back.lineTo(300, 300);
-  // canvas_back.closePath();
-
 
   canvas_back.addEventListener('click', (event) => {
    
@@ -274,28 +211,13 @@ let startGameLoop = function () {
     // console.log(`canvaswidth ${canvas_back.width}`)
     // console.log(`canvasheight ${canvas_back.height}`)
 
-
-  //  //simulate keypress
-  //   simulateKeyPress('ArrowUp');
-
     ctx_back.fillStyle ='red'
     ctx_back.beginPath()
     ctx_back.arc(x,y,5,0,Math.PI*2)
     ctx_back.fill()
     ctx_back.stroke()
     
-
-
-    // const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    // const color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
-    // const shape = colorsHash[color];
-    // if (shape) {
-    //   console.log('clicked!!!')
-    //   //  alert('click on circle: ' + shape.id);
-    // }
    });
-  //hit
-  //console.log(number);
   number++
   //}
 
@@ -321,6 +243,11 @@ function chooseScene(gameScene) {
       cancelAnimationFrame(animationID_firstPage) //cancel first page loop
       startGameLoop()
       counter.style.display = 'block'
+      advisory.style.display = 'block'
+      Leftarrows.style.display = 'block'
+      Rightarrows.style.display = 'block'
+      Toparrows.style.display = 'block'
+      Btmarrows.style.display = 'block'
       break
   }
 }

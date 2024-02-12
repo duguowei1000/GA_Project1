@@ -36,35 +36,42 @@
 	background-color: white;
 	opacity: 0.8;
 	width: 250px;
-	
 }
 
 #advisory{
-	margin-top:650px;
+	margin-top:400px;
 	text-align: center;
 	background-color: white;
-	opacity: 0.8;
+	opacity: 0.5;
 	width: 350px;
-	font-size: 5px;
+	font-size: 2px;
 	
 }
-#Leftarrows{
-	margin-top:150px;
-	margin-left: -200px;
-	opacity: 0.5;
+.arrows{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
 }
+#Leftarrows{
+	margin-top: -50px; 
+	margin-left: -120px;
+	opacity: 0.4;
+}
+
 #Rightarrows{
-	margin-top:150px;
-	margin-left: 200px;
-	opacity: 0.5;
+	margin-top: -50px; 
+	margin-left: 140px;
+	opacity: 0.4;
 }
 #Toparrows{
-	margin-top:150px;
-	opacity: 0.5;
+	margin-top: -140px;
+	margin-left: -10px;
+	opacity: 0.4;
 }
 #Btmarrows{
-	margin-top:350px;
-	opacity: 0.5;
+	margin-top: 110px; 
+	opacity: 0.4;
 }
 
 span{
