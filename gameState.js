@@ -161,17 +161,6 @@ let startGameLoop = function () {
   player_.update(directionInput.direction)
 
   coinReward.update()
-  // const drawTriangle = ()=>{
-  //   let height = 200 * Math.cos(Math.PI / 6);
-
-  //   canvas_back.beginPath();
-  //   canvas_back.moveTo(200, 600);
-  //   canvas_back.lineTo(300, 600);
-  //   canvas_back.lineTo(200, 600 - height);
-  //   canvas_back.closePath();
-
-  // } 
-  // drawTriangle()
 
   zombieS.forEach((zom) => {
     zom.update()
@@ -201,23 +190,22 @@ let startGameLoop = function () {
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
-
-  canvas_back.addEventListener('click', (event) => {
+  //label red circle
+  // canvas_back.addEventListener('click', (event) => {
    
-    let x = event.clientX //- canvas_back.offsetLeft 
-    let y = event.clientY + canvas_back.offsetTop*5
-    // console.log("x",x,"y",y)
-    // console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
-    // console.log(`canvaswidth ${canvas_back.width}`)
-    // console.log(`canvasheight ${canvas_back.height}`)
+  //   let x = event.clientX //- canvas_back.offsetLeft 
+  //   let y = event.clientY + canvas_back.offsetTop*5
+  //   // console.log("x",x,"y",y)
+  //   // console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
+  //   // console.log(`canvaswidth ${canvas_back.width}`)
+  //   // console.log(`canvasheight ${canvas_back.height}`)
 
-    ctx_back.fillStyle ='red'
-    ctx_back.beginPath()
-    ctx_back.arc(x,y,5,0,Math.PI*2)
-    ctx_back.fill()
-    ctx_back.stroke()
-    
-   });
+  //   ctx_back.fillStyle ='red'
+  //   ctx_back.beginPath()
+  //   ctx_back.arc(x,y,5,0,Math.PI*2)
+  //   ctx_back.fill()
+  //   ctx_back.stroke()
+  //  });
   number++
   //}
 
