@@ -15,9 +15,6 @@ class DirectionInput {
       }
     }
 
-    keypress(){
-      simulateKeyPress('ArrowUp')
-    }
   
     get direction() {
       console.log(this.heldDirections[0])
@@ -29,15 +26,15 @@ class DirectionInput {
       // if (touch){
 
       // }
-      document.addEventListener('mousedown', (e) => {
-
+      document.addEventListener('touchstart', (e) => {
+        console.log(e)
         // const mousePos = {
         //   x: e.clientX - canvas_back.offsetLeft,
         //   y: e.clientY - canvas_back.offsetTop
       
         // };
-        let x = e.pageX//clientX - canvas_back.offsetLeft
-        let y = e.pageY- canvas_back.offsetTop//clientY - canvas_back.offsetTop
+        let x = e.targetTouches[0].pageX//clientX - canvas_back.offsetLeft
+        let y = e.targetTouches[0].pageY//- canvas_back.offsetTop//clientY - canvas_back.offsetTop
         
         // console.log( 'canvas_back.height',canvas_back.height)
         // console.log( 'canvas_back.width',canvas_back.width)
@@ -46,6 +43,14 @@ class DirectionInput {
         // console.log("midXaxis",midXaxis)
         // console.log("midYaxis",midYaxis)
         // console.log("x",x,"y",y)
+
+    ctx_back.fillStyle ='red'
+    ctx_back.beginPath()
+    ctx_back.arc(x,y,5,0,Math.PI*2)
+    ctx_back.fill()
+    ctx_back.stroke()
+    
+
         
         if( y >(midYaxis -50) && y < (midYaxis+50)){
           if(x<midXaxis){
@@ -87,8 +92,10 @@ class DirectionInput {
 
 
       });
-      document.addEventListener('mouseup', (e) => {
+      document.addEventListener('touchend', (e) => {
         this.heldDirections= []
+        console.log(this.heldDirections[0])
+        console.log("ending", e)
       });
 
 

@@ -39,12 +39,14 @@
 }
 
 #advisory{
-	margin-top:400px;
+	margin-top:550px;
 	text-align: center;
 	background-color: white;
 	opacity: 0.5;
 	width: 350px;
 	font-size: 2px;
+	pointer-events: none;
+	cursor: default;
 	
 }
 .arrows{
@@ -124,6 +126,11 @@ p2{
 	font-weight: bolder;
 	
 }
+.prevent-select {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+  }
 .startButton{
 	background-color: rgb(30,144,255);
 	color: white;
