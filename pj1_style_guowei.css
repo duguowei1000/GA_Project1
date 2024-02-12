@@ -36,8 +36,46 @@
 	background-color: white;
 	opacity: 0.8;
 	width: 250px;
+}
+
+#advisory{
+	margin-top:550px;
+	text-align: center;
+	background-color: white;
+	opacity: 0.5;
+	width: 350px;
+	font-size: 2px;
+	pointer-events: none;
+	cursor: default;
 	
 }
+.arrows{
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+#Leftarrows{
+	margin-top: -50px; 
+	margin-left: -120px;
+	opacity: 0.4;
+}
+
+#Rightarrows{
+	margin-top: -50px; 
+	margin-left: 140px;
+	opacity: 0.4;
+}
+#Toparrows{
+	margin-top: -140px;
+	margin-left: -10px;
+	opacity: 0.4;
+}
+#Btmarrows{
+	margin-top: 110px; 
+	opacity: 0.4;
+}
+
 span{
 	font-size: 30px;
 	color: Black;
@@ -88,6 +126,11 @@ p2{
 	font-weight: bolder;
 	
 }
+.prevent-select {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+  }
 .startButton{
 	background-color: rgb(30,144,255);
 	color: white;
@@ -113,6 +156,10 @@ p2{
 	margin-right: auto;
 	position: absolute;
 }
+
+@media only screen and (max-width: 600px) {
+	#canvas_back {background-color:  red;}
+  }
 
 /* playselection */
 #canvas_start{

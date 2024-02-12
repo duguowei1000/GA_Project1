@@ -6,20 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
     <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
     <link rel="stylesheet" href="pj1_style_guowei.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="http://calebevans.me/projects/jcanvas/resources/jcanvas/jcanvas.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@getalby/bitcoin-connect@latest/dist/index.browser.js"></script>
+
   </head>
 
   <body>
-    
+
     <div class="base">
-    
+      <!-- <div id="derp"> -->
       <canvas id="canvas_back"></canvas>
-      <div class="fixed">
+    <!-- </div> -->
+      <div class="fixed prevent-select">
         <div id="counter"><span>Score :</span><span id="scoreEL">0</span></div>
+      </div>
+      <div class="fixed arrows prevent-select">
+        <div id="advisory" unselectable="on"><span>Navigate using keyboard(Desktop) or touch the arrows (Mobile)</span></div>
+      </div>
+      <div class="fixed arrows prevent-select">
+        <div id="Leftarrows">
+          <img src = "./assets/arrows/lefta.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
+        </div>
+      </div>
+      <div class="fixed arrows prevent-select">
+        <div id="Rightarrows">
+          <img src = "./assets/arrows/righta.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
+        </div>
+      </div>
+      <div class="fixed arrows prevent-select">
+        <div id="Toparrows">
+          <img src = "./assets/arrows/upa.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
+        </div>
+      </div>
+      <div class="fixed arrows prevent-select">
+        <div id="Btmarrows">
+          <img src = "./assets/arrows/downa.png" style="width:80px;height:80px;pointer-events: none;cursor: default;" >
+        </div>
       </div>
 
       <div class="fixed avatarScreen" id="avatar_screen">
@@ -57,9 +82,11 @@
         </div>
       </div>
     </div>
-
     <script src="keyPressDirectionInput.js"></script>
     <script src="Objects.js"></script>
     <script src="gameState.js"></script>
+
+    <!-- <script src="hitregion.js"></script> -->
   </body>
+
 </html>

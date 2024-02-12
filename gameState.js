@@ -4,8 +4,16 @@ const ctx_back = canvas_back.getContext('2d')
 const canvas_start = document.getElementById('canvas_start');
 const ctx_start = canvas_start.getContext('2d')
 
+const hitCanvas = document.createElement('canvas');
+const hitCtx = hitCanvas.getContext('2d');
+
 canvas_back.height = window.innerHeight
 canvas_back.width = window.innerWidth
+let midYaxis = canvas_back.height/2
+let midXaxis = canvas_back.width/2  
+
+hitCtx.height = window.innerHeight
+hitCtx.width = window.innerWidth
 
 const startImg = new Image();
 startImg.src = "./assets/halloweenwallpaper.png";
@@ -22,6 +30,11 @@ imgZombie.src = "./assets/zombies.png";
 const directionInput = new DirectionInput();
 
 const counter = document.querySelector('#counter')
+const advisory = document.querySelector('#advisory')
+const Leftarrows = document.querySelector('#Leftarrows')
+const Rightarrows = document.querySelector('#Rightarrows')
+const Toparrows = document.querySelector('#Toparrows')
+const Btmarrows = document.querySelector('#Btmarrows')
 const scoreEl = document.querySelector('#scoreEL')
 const startGamebtn = document.querySelector('#startGameBtn')
 const backFirstpgbtn = document.querySelector('#backFirstpgbtn')
@@ -33,18 +46,19 @@ const firstPlayerSelect = document.querySelector("#firstPlayerSelect")
 const secondPlayerSelect = document.querySelector("#secondPlayerSelect")
 const avatar_startGame = document.querySelector("#avatar_startGame")
 
+// //arrow keys
+// const upArrowSelect = document.querySelector("#upArrowSelect")
+
 ////Setting of FPS (GameSpeed)
 const FPS = 20;
 let prevTick = 0;
 ////////////////////////////
 
 const x = canvas_back.width / 2
-console.log(x)
 const y = canvas_back.height / 2
-console.log(y)
 
-console.log(`canvaswidth ${canvas_back.width}`)
-console.log(`canvasheight ${canvas_back.height}`)
+// console.log(`canvaswidth ${canvas_back.width}`)
+// console.log(`canvasheight ${canvas_back.height}`)
 
 //Distance between 2 objects (hypothenuse)
 function distHyp(objectOne, objectTwo) {
@@ -64,7 +78,6 @@ let zombieS = []
 let score = 0
 let number = 0;
 let animationID //animate frame
-
 
 //initialise new game
 function init() {
@@ -93,8 +106,13 @@ let player2EventTriggered = false
 
 
 let firstPageLoop = function () {
-
+//
   //DOM
+  Leftarrows.style.display = 'none'
+  Rightarrows.style.display = 'none'
+  Toparrows.style.display = 'none'
+  Btmarrows.style.display = 'none'
+  advisory.style.display = 'none'
   counter.style.display = 'none'
   avatar_screen.style.display = 'flex'
 
@@ -108,8 +126,6 @@ let firstPageLoop = function () {
     ctx_start.drawImage(startPlayer2.img, playerWidth * FrameX, playerHeight * FrameY, playerWidth, playerHeight, 190, 0, playerWidthExt, playerHeightExt)
   }
   ctx_back.drawImage(startImg, 0, 0, canvas_back.width, canvas_back.height);
-
-
 
 }
 
@@ -137,18 +153,25 @@ let startGameLoop = function () {
   ctx_back.clearRect(0, 0, canvas_back.width, canvas_back.height)
 
   //Draw background  
-  //ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
+  // ctx_back.drawImage(backgroundImg, 0, 0, 550, 700);
   ctx_back.drawImage(backgroundImg, 0, 0, canvas_back.width, canvas_back.height);
-
+  
   //Draw Objects
 
   player_.update(directionInput.direction)
-  //player_.draw()
-  //player_.updatePosition(directionInput.direction)
-  coinReward.update()
 
-  console.log(player_.x)
-  console.log(player_.y)
+  coinReward.update()
+  // const drawTriangle = ()=>{
+  //   let height = 200 * Math.cos(Math.PI / 6);
+
+  //   canvas_back.beginPath();
+  //   canvas_back.moveTo(200, 600);
+  //   canvas_back.lineTo(300, 600);
+  //   canvas_back.lineTo(200, 600 - height);
+  //   canvas_back.closePath();
+
+  // } 
+  // drawTriangle()
 
   zombieS.forEach((zom) => {
     zom.update()
@@ -160,29 +183,41 @@ let startGameLoop = function () {
       btnscreen.style.display = 'flex'
       bigscoreEl.innerText = score       //Update End score
     }
-    //zom.draw() //draw black circle
-    //zom.drawImg() 
   })
 
   //Coin reward
   const distCoinPlayer = distHyp(player_, coinReward)
-  // console.log(distCoinPlayer)
   if (distCoinPlayer - coinReward.radius - player_.radius < 20) {
-    // console.log('coinTaken')
-    // console.log(coinS)
     coinReward.coinTaken()
     score += 100
 
   }
   scoreEl.innerText = score  //update score
-
   directionInput.initKeys()  //Keypress
+
   // console.log(`Direction is :${directionInput.direction}`)
   //Add new zombies after X steps
+
   if (number % 20 === 0) {
     zombieS.push(new Zombies(x, y))
   }
-  //console.log(number);
+
+  canvas_back.addEventListener('click', (event) => {
+   
+    let x = event.clientX //- canvas_back.offsetLeft 
+    let y = event.clientY + canvas_back.offsetTop*5
+    // console.log("x",x,"y",y)
+    // console.log("canvas_back.offsetLeft ",canvas_back.offsetLeft, 'canvas_back.offsetTop ',canvas_back.offsetTop )
+    // console.log(`canvaswidth ${canvas_back.width}`)
+    // console.log(`canvasheight ${canvas_back.height}`)
+
+    ctx_back.fillStyle ='red'
+    ctx_back.beginPath()
+    ctx_back.arc(x,y,5,0,Math.PI*2)
+    ctx_back.fill()
+    ctx_back.stroke()
+    
+   });
   number++
   //}
 
@@ -208,6 +243,11 @@ function chooseScene(gameScene) {
       cancelAnimationFrame(animationID_firstPage) //cancel first page loop
       startGameLoop()
       counter.style.display = 'block'
+      advisory.style.display = 'block'
+      Leftarrows.style.display = 'block'
+      Rightarrows.style.display = 'block'
+      Toparrows.style.display = 'block'
+      Btmarrows.style.display = 'block'
       break
   }
 }
@@ -228,6 +268,7 @@ startGamebtn.addEventListener("click", () => {
 backFirstpgbtn.addEventListener("click", () => {
   init()
   btnscreen.style.display = "none"
+  ctx_back.clearRect(0, 0, canvas_back.width, canvas_back.height)
   chooseScene(1)  //back to home page
 })
 
@@ -339,7 +380,6 @@ secondPlayerSelect.addEventListener("click", () => {
     secondPlayerSelect.style.border = "3px solid #FBED64"
     firstPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility = "visible"
-    console.log(">>>ToggleTrue")
   } else {
     secondPlayerSelect.style.border = "none"
     avatar_startGame.style.visibility = "hidden"
@@ -359,3 +399,5 @@ avatar_startGame.addEventListener("click", () => {
   // proceed to Game
   chooseScene(2)
 })
+
+
